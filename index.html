@@ -115,13 +115,21 @@ html,body{max-width:100%;overflow-x:hidden}
 
 .auth-screen{position:fixed!important;inset:0!important;z-index:99999!important;display:flex!important;align-items:center!important;justify-content:center!important;background:linear-gradient(145deg,#075b3d,#0c6b49)!important;padding:18px!important;box-sizing:border-box}
 .auth-card{width:min(430px,100%)!important;max-height:92vh!important;overflow:auto!important}
+
+/* ===== FINAL MERGED BRAND + SLIDER + SHOP VISIT ===== */
+.brand{display:flex;align-items:center;gap:8px}.brand-logo{display:none;width:36px;height:36px;border-radius:10px;object-fit:cover;background:#fff}.brand-fallback{width:36px;height:36px;border-radius:10px;background:#fff8dc;color:var(--gold);display:grid;place-items:center;font-weight:900;font-size:22px}.brand-fallback.hide{display:none}.brand-logo.show{display:block}
+.splash-logo-img{display:none;width:100%;height:100%;object-fit:cover;border-radius:28px}.logo-mark.has-image:before,.logo-mark.has-image:after{display:none}
+.slider-hero{position:relative;display:block;padding:0;min-height:0;height:310px}.hero-slider-track{height:100%;position:relative}.hero-slide{position:absolute;inset:0;padding:30px;display:none;justify-content:space-between;align-items:center;background:linear-gradient(110deg,#0e5b3e,#1b7957)}.hero-slide.active{display:flex}.hero-copy{max-width:62%;z-index:2}.hero-copy h2{font-size:34px;margin:0 0 8px}.hero-copy p{color:#e7f1ec;line-height:1.5}.hero-slide .hero-art{width:35%;height:100%;display:grid;place-items:center}.hero-slide .hero-art img{max-width:100%;max-height:220px;border-radius:18px;object-fit:cover}.hero-slider-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:#fff;color:#173126;font-size:28px;z-index:4}.hero-slider-prev{left:18px}.hero-slider-next{right:18px}.hero-slider-dots{position:absolute;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:4}.hero-slider-dot{width:10px;height:10px;border-radius:50%;background:#ffffff77;padding:0}.hero-slider-dot.active{background:var(--gold)}
+.shop-products-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.shop-head{background:#f5f8f6;border-radius:16px;padding:15px;margin-bottom:15px}.shop-head h3{margin:0 0 5px;color:var(--green)}
+@media(max-width:620px){.slider-hero{height:360px}.hero-slide{padding:24px;align-items:flex-start}.hero-copy{max-width:100%;padding-top:18px}.hero-copy h2{font-size:28px}.hero-slide .hero-art{position:absolute;right:20px;bottom:28px;width:38%;height:45%}.hero-slider-arrow{width:38px;height:38px}.hero-slider-prev{left:10px}.hero-slider-next{right:10px}}
+
 </style>
 </head>
 <body>
 <div id="splash" class="splash">
   <div class="splash-box">
-    <div class="logo-mark"></div>
-    <h1>SUKKUR <span style="color:#d4af37">BAZAR</span></h1>
+    <div class="logo-mark" id="splashLogo"><img class="splash-logo-img" id="splashLogoImg" alt="Sukkur Bazar logo"></div>
+    <h1 id="splashBrandName">SUKKUR <span style="color:#d4af37">BAZAR</span></h1>
     <p>Har Zaroorat, Ab Aapke Shehar Mein</p>
     <div class="loader"><i></i></div>
   </div>
@@ -130,7 +138,7 @@ html,body{max-width:100%;overflow-x:hidden}
 <header class="top">
   <div class="topbar">
     <button class="menu-trigger" onclick="openDrawer()" aria-label="Menu">☰</button>
-    <div class="brand">SUKKUR <span>BAZAR</span></div>
+    <div class="brand" aria-label="Sukkur Bazar"><img id="topLogo" class="brand-logo" alt=""><span id="topLogoFallback" class="brand-fallback" aria-hidden="true">S</span><span id="topBrandName">SUKKUR <span>BAZAR</span></span></div>
     <div class="search"><input id="search" placeholder="Search products, shops & categories..." onkeydown="if(event.key==='Enter')searchProducts()" oninput="searchProducts()"><button onclick="searchProducts()">⌕</button></div>
     <div class="top-actions">
       <button class="icon-btn" onclick="openWishlist()" aria-label="Wishlist">♡<span id="wishBadge" class="badge">0</span></button>
@@ -142,14 +150,11 @@ html,body{max-width:100%;overflow-x:hidden}
 <nav class="nav"><div class="nav-inner" id="catNav"></div></nav>
 
 <main id="homeScreen" class="app-screen">
-  <section class="hero">
-    <div>
-      <div style="color:#d4af37;font-weight:800;margin-bottom:7px">WELCOME TO SUKKUR BAZAR</div>
-      <h2>Har Zaroorat,<br>Ab Aapke Shehar Mein</h2>
-      <p>Shop from local Sukkur sellers — grocery, fashion, cosmetics, electronics, health and much more, all in one place.</p>
-      <button class="gold-btn" onclick="navigate('categories')">Shop by Category</button>
-    </div>
-    <div class="hero-art">🛍️</div>
+  <section class="hero slider-hero">
+    <div class="hero-slider-track" id="heroSliderTrack"></div>
+    <button class="hero-slider-arrow hero-slider-prev" onclick="changeBanner(-1)">‹</button>
+    <button class="hero-slider-arrow hero-slider-next" onclick="changeBanner(1)">›</button>
+    <div class="hero-slider-dots" id="heroSliderDots"></div>
   </section>
   <section class="section">
     <div class="section-head"><h3>Shop by Category</h3><button class="link" onclick="navigate('categories')">View All</button></div>
@@ -269,14 +274,18 @@ function productImage(p){return p.image||p.main_image_url||p.images?.[0]||''}
 function liveProductCard(p){
   const img=productImage(p);
   const old=Number(p.old||0);
+  const id=String(p.id);
+  const shopId=String(p.shop_id||'');
   return `<article class="product">
-    <div class="pic" style="overflow:hidden">${img?`<img src="${esc(img)}" alt="${esc(p.name)}" style="width:100%;height:100%;object-fit:cover;display:block">`:'📦'}<button class="fav ${state.wishlist.includes(p.id)?'on':''}" onclick="event.stopPropagation();toggleWish('${esc(p.id)}')">${state.wishlist.includes(p.id)?'♥':'♡'}</button></div>
+    <div class="pic" style="overflow:hidden">${img?`<img src="${esc(img)}" alt="${esc(p.name)}" style="width:100%;height:100%;object-fit:cover;display:block">`:'📦'}<button class="fav ${state.wishlist.includes(p.id)?'on':''}" onclick="event.stopPropagation();toggleWish('${esc(id)}')">${state.wishlist.includes(p.id)?'♥':'♡'}</button></div>
     <div class="pbody"><div class="shop">${esc(p.shop||'Local Seller')}</div><h4>${esc(p.name)}</h4>
     <div class="stars">★ ${Number(p.rating||4.5).toFixed(1)}</div>
-    <div class="price">${money(p.price)} ${old>p.price?`<span class="old">${money(old)}</span>`:''}</div><small style="color:#7b8881">${Number(p.stock||0)} available</small>
-    <button class="add" onclick="event.preventDefault();event.stopPropagation();window.addCart(String('${esc(p.id)}'))" ${Number(p.stock||0)<=0?'disabled':''}>${Number(p.stock||0)<=0?'Out of Stock':'Add to Cart'}</button>
-    <button class="outline-btn" style="width:100%;margin-top:7px" onclick="event.preventDefault();event.stopPropagation();window.openProduct(String('${esc(p.id)}'))">View Details</button></div>
-  </article>`
+    <div class="price">${money(p.price)} ${old>Number(p.price)?`<span class="old">${money(old)}</span>`:''}</div><small style="color:#7b8881">${Number(p.stock||0)} available</small>
+    <button class="add" onclick="event.preventDefault();event.stopPropagation();addCart('${esc(id)}')" ${Number(p.stock||0)<=0?'disabled':''}>${Number(p.stock||0)<=0?'Out of Stock':'Add to Cart'}</button>
+    <button class="outline-btn" style="width:100%;margin-top:7px" onclick="openProduct('${esc(id)}')">View Details</button>
+    <button class="outline-btn" style="width:100%;margin-top:7px" onclick="openVisitShop('${esc(shopId)}')">🏪 Visit Shop</button>
+    <button class="outline-btn" style="width:100%;margin-top:7px" onclick="openSellerChat('${esc(shopId)}')">💬 Chat with Seller</button></div>
+  </article>`;
 }
 
 async function loadLiveCatalog(){
@@ -344,13 +353,29 @@ function filterProducts(cat){currentCategory=cat;currentProducts=products.filter
 function searchProducts(){const q=(document.getElementById('search')?.value||'').trim().toLowerCase();currentProducts=products.filter(p=>(p.name+' '+p.shop+' '+p.cat).toLowerCase().includes(q));document.getElementById('productTitle').textContent=q?'Search Results':'Popular Products';renderProducts()}
 function renderLiveBanners(){
   const hero=document.querySelector('.hero');
-  if(!hero||!liveBanners.length)return;
-  const b=liveBanners[0];
-  const title=b.title||b.heading||b.name||'Sukkur Bazar';
-  const sub=b.description||b.subtitle||b.text||'';
-  const img=b.image_url||b.image||b.banner_url||'';
-  hero.innerHTML=`<div><h2>${esc(title)}</h2><p>${esc(sub)}</p>${b.link_url?`<button class="gold-btn" onclick="location.href='${esc(b.link_url)}'">Shop Now</button>`:''}</div><div class="hero-art">${img?`<img src="${esc(img)}" style="max-height:170px;max-width:320px;border-radius:16px;object-fit:cover">`:'🛍️'}</div>`;
+  if(!hero)return;
+  const banners=(liveBanners&&liveBanners.length)?liveBanners:[
+    {title:'Welcome to Sukkur Bazar',description:'Har Zaroorat, Ab Aapke Shehar Mein.',emoji:'🛍️'},
+    {title:'Deals & Offers',description:'Great prices from trusted local sellers.',emoji:'🏷️'},
+    {title:'Chat & Visit Seller Shops',description:'Ask a seller a question and view their complete shop.',emoji:'🏪'}
+  ];
+  hero.classList.add('slider-hero');
+  const track=document.getElementById('heroSliderTrack'),dots=document.getElementById('heroSliderDots');
+  if(!track||!dots)return;
+  track.innerHTML=banners.map((b,i)=>{
+    const title=b.title||b.heading||b.name||'Sukkur Bazar';
+    const sub=b.description||b.subtitle||b.text||'';
+    const img=b.image_url||b.image||b.banner_url||'';
+    const emoji=b.emoji||'🛍️';
+    const action=b.link_url?`<button class="gold-btn" onclick="location.href='${esc(b.link_url)}'">Shop Now</button>`:`<button class="gold-btn" onclick="navigate('search',{query:''})">Shop Now</button>`;
+    return `<div class="hero-slide ${i===0?'active':''}"><div class="hero-copy"><div style="color:#d4af37;font-weight:800;margin-bottom:7px">SUKKUR BAZAR</div><h2>${esc(title)}</h2><p>${esc(sub)}</p>${action}</div><div class="hero-art">${img?`<img src="${esc(img)}" alt="${esc(title)}">`:`<span style="font-size:86px">${emoji}</span>`}</div></div>`;
+  }).join('');
+  dots.innerHTML=banners.map((_,i)=>`<button class="hero-slider-dot ${i===0?'active':''}" onclick="showBanner(${i})" aria-label="Banner ${i+1}"></button>`).join('');
+  window.bannerIndex=0;clearInterval(window.bannerTimer);
+  if(banners.length>1)window.bannerTimer=setInterval(()=>changeBanner(1),3500);
 }
+function showBanner(index){const slides=document.querySelectorAll('.hero-slide'),dots=document.querySelectorAll('.hero-slider-dot');if(!slides.length)return;window.bannerIndex=(index+slides.length)%slides.length;slides.forEach((x,i)=>x.classList.toggle('active',i===window.bannerIndex));dots.forEach((x,i)=>x.classList.toggle('active',i===window.bannerIndex));}
+function changeBanner(step){showBanner((window.bannerIndex||0)+step)}
 
 async function ensureCustomerProfile(user){
   if(!user)return;
@@ -931,8 +956,71 @@ async function finishSplash(){
   if(splash)splash.classList.add('hidden');
   if(!shoppingSession?.user)openAuth();
 }
+
+/* ===== FINAL MERGED ADMIN BRANDING / SHOP VISIT / SELLER CHAT ===== */
+let marketplaceBrand={name:'Sukkur Bazar',logo_url:''};
+async function loadAdminControlledContent(){
+  try{
+    const {data:settings,error:settingsError}=await sb.from('marketplace_settings').select('*').limit(1).maybeSingle();
+    if(!settingsError&&settings){
+      marketplaceBrand={name:settings.name||settings.marketplace_name||settings.title||'Sukkur Bazar',logo_url:settings.logo_url||settings.logo||settings.logo_url_path||''};
+    }
+  }catch(e){console.warn('Brand settings:',e)}
+  try{
+    const {data:bs,error:bErr}=await sb.from('banner_ads').select('*').eq('active',true).order('sort_order',{ascending:true});
+    if(!bErr&&Array.isArray(bs)&&bs.length)liveBanners=bs;
+  }catch(e){console.warn('Banner ads:',e)}
+  applyMarketplaceBrand();
+  renderLiveBanners();
+}
+function applyMarketplaceBrand(){
+  const name=String(marketplaceBrand.name||'Sukkur Bazar').trim()||'Sukkur Bazar';
+  const parts=name.split(/\s+/),first=parts.shift()||'Sukkur',rest=parts.join(' ')||'Bazar';
+  const top=document.getElementById('topBrandName');if(top)top.innerHTML=esc(first)+' <span>'+esc(rest)+'</span>';
+  const splash=document.getElementById('splashBrandName');if(splash)splash.innerHTML=esc(first)+' <span style="color:#d4af37">'+esc(rest)+'</span>';
+  const url=String(marketplaceBrand.logo_url||'').trim();
+  const img=document.getElementById('topLogo'),fallback=document.getElementById('topLogoFallback');
+  if(img&&fallback){img.onerror=()=>{img.removeAttribute('src');img.classList.remove('show');fallback.classList.remove('hide')};if(url){img.src=url;img.classList.add('show');fallback.classList.add('hide')}else{img.removeAttribute('src');img.classList.remove('show');fallback.classList.remove('hide')}}
+  const sm=document.getElementById('splashLogo'),si=document.getElementById('splashLogoImg');
+  if(si&&sm){if(url){si.src=url;si.style.display='block';sm.classList.add('has-image')}else{si.removeAttribute('src');si.style.display='none';sm.classList.remove('has-image')}}
+}
+async function loadLiveCatalog(){
+  try{
+    const [{data:cats,error:catErr},{data:ps,error:pErr},{data:bs,error:bErr}]=await Promise.all([
+      sb.from('categories').select('*').order('name'),
+      sb.from('products').select('*,categories(name)').eq('status','Active').order('created_at',{ascending:false}),
+      sb.from('banner_ads').select('*').eq('active',true).order('sort_order',{ascending:true})
+    ]);
+    if(catErr)console.warn('Categories:',catErr.message);if(pErr)throw pErr;if(bErr)console.warn('Banners:',bErr.message);
+    liveCategories=(cats||[]).map(c=>({id:c.id,name:c.name,emoji:c.icon||c.emoji||'📦'}));
+    const shopIds=[...new Set((ps||[]).map(p=>p.shop_id).filter(Boolean))];let shopMap={};
+    if(shopIds.length){const {data:shops,error:shopErr}=await sb.from('shops').select('*').in('id',shopIds);if(shopErr)console.warn('Shops:',shopErr.message);(shops||[]).forEach(sh=>{shopMap[String(sh.id)]=sh})}
+    const mapped=(ps||[]).map(p=>{const sh=shopMap[String(p.shop_id)]||{};return {id:p.id,seller_id:p.seller_id,shop_id:p.shop_id,name:p.name,cat:p.categories?.name||'Other',shop:sh.name||sh.shop_name||'Local Seller',shop_phone:sh.phone||sh.shop_phone||'',shop_logo:sh.logo_url||'',price:Number(p.price||0),old:Number(p.old_price||0),stock:Number(p.stock||0),emoji:p.emoji||'📦',rating:Number(p.rating||4.5),description:p.description||'',main_image_url:p.main_image_url||'',image:p.main_image_url||'',sku:p.sku||''}});
+    products.length=0;mapped.forEach(x=>products.push(x));currentProducts=[...products];
+    state.cart=(state.cart||[]).filter(i=>findProduct(i.id));state.wishlist=(state.wishlist||[]).filter(id=>findProduct(id));save();
+    liveBanners=(bs&&bs.length)?bs:liveBanners;renderLiveCatalogUI();await loadAdminControlledContent();return true;
+  }catch(e){console.error('Catalog load failed:',e);renderLiveCatalogUI();await loadAdminControlledContent();return false}
+}
+function openVisitShop(shopId){
+  const key=String(shopId||'');const shopProducts=products.filter(p=>String(p.shop_id)===key);if(!shopProducts.length){toast('Shop products not found',true);return}
+  const first=shopProducts[0],shopName=first.shop||'Seller Shop',phone=first.shop_phone||'';
+  modal(`🏪 ${esc(shopName)}`,`<div class="shop-head"><h3>${esc(shopName)}</h3>${phone?`<div style="color:var(--muted)">📞 ${esc(phone)}</div>`:''}<button class="add" style="margin-top:10px" onclick="openSellerChat('${esc(key)}')">💬 Chat with Seller</button></div><h4>${shopProducts.length} Products</h4><div class="shop-products-grid">${shopProducts.map(liveProductCard).join('')}</div>`,true);
+}
+let activeChatSeller={id:'',name:''};
+function openSellerChat(shopId){
+  const key=String(shopId||'');const p=products.find(x=>String(x.shop_id)===key)||products.find(x=>String(x.shop)===key);if(!p){toast('Seller not found',true);return}
+  activeChatSeller={id:key,name:p.shop||'Seller'};state.chats=Array.isArray(state.chats)?state.chats:[];
+  modal(`💬 Chat — ${esc(activeChatSeller.name)}`,`<div id="sellerChatMessages" style="height:250px;overflow:auto;background:#f5f8f6;border-radius:14px;padding:12px"></div><div class="row" style="margin-top:10px"><input id="sellerChatInput" placeholder="Write a message"><button class="add" onclick="sendSellerChat()">Send</button></div>`);renderSellerChat();
+}
+function renderSellerChat(){const box=document.getElementById('sellerChatMessages');if(!box)return;const msgs=state.chats.filter(m=>String(m.shop_id)===String(activeChatSeller.id));box.innerHTML=msgs.map(m=>`<div style="background:${m.sender==='customer'?'#0e5b3e':'#fff'};color:${m.sender==='customer'?'#fff':'#173126'};padding:9px 11px;border-radius:11px;margin:7px 0;max-width:84%;${m.sender==='customer'?'margin-left:auto':''}">${esc(m.message)}</div>`).join('')||'<div style="text-align:center;color:var(--muted);padding:35px 10px">Start the conversation with this seller.</div>';box.scrollTop=box.scrollHeight}
+function sendSellerChat(){const i=document.getElementById('sellerChatInput');if(!i||!i.value.trim())return;state.chats.push({shop_id:activeChatSeller.id,sender:'customer',message:i.value.trim(),created_at:new Date().toISOString()});save();i.value='';renderSellerChat();toast('Message saved ✓')}
+function openChat(){const p=products.find(x=>x.shop_id);if(p)openSellerChat(p.shop_id);else toast('No seller available',true)}
+function toggleChat(){openChat()}
+function showProductPage(id,push=true){if(push&&activePage!=='product')pageHistory.push({name:'product',data:{id}});const p=findProduct(id);if(!p)return;showPage(pageHead('Product Details')+`<div class="product-detail" style="background:#fff;padding:18px;border-radius:20px;border:1px solid var(--line)"><div class="pic" style="height:300px;border-radius:17px;overflow:hidden">${productImage(p)?`<img src="${esc(productImage(p))}" style="width:100%;height:100%;object-fit:cover">`:p.emoji||'📦'}</div><div><div class="shop">${esc(p.shop)}</div><h1 style="margin:8px 0;font-size:27px">${esc(p.name)}</h1><div class="stars">★ ${Number(p.rating||4.5).toFixed(1)}</div><div class="price" style="font-size:29px">${money(p.price)} ${Number(p.old||0)>p.price?`<span class="old">${money(p.old)}</span>`:''}</div><p style="color:var(--muted);line-height:1.6">${esc(p.description||'Product details provided by the seller.')}</p><p><b>Stock:</b> ${Number(p.stock||0)} available</p><div class="row"><button class="add" onclick="addCart('${esc(p.id)}')">Add to Cart</button><button class="gold-btn" onclick="buyNow('${esc(p.id)}')">Buy Now</button></div><button class="outline-btn" style="width:100%;margin-top:9px" onclick="openVisitShop('${esc(p.shop_id||'')}')">🏪 Visit Shop</button><button class="outline-btn" style="width:100%;margin-top:9px" onclick="openSellerChat('${esc(p.shop_id||'')}')">💬 Chat with Seller</button></div></div>`,'product')}
+
 renderCats();renderHomeProducts();updateBadges();
 initShoppingSupabase();
+loadAdminControlledContent();
 setTimeout(finishSplash,2600);
 
 </script>
