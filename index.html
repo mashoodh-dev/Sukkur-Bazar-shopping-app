@@ -274,8 +274,8 @@ function liveProductCard(p){
     <div class="pbody"><div class="shop">${esc(p.shop||'Local Seller')}</div><h4>${esc(p.name)}</h4>
     <div class="stars">★ ${Number(p.rating||4.5).toFixed(1)}</div>
     <div class="price">${money(p.price)} ${old>p.price?`<span class="old">${money(old)}</span>`:''}</div><small style="color:#7b8881">${Number(p.stock||0)} available</small>
-    <button class="add" onclick="addCart('${esc(p.id)}')" ${Number(p.stock||0)<=0?'disabled':''}>${Number(p.stock||0)<=0?'Out of Stock':'Add to Cart'}</button>
-    <button class="outline-btn" style="width:100%;margin-top:7px" onclick="openProduct('${esc(p.id)}')">View Details</button></div>
+    <button class="add" onclick="event.preventDefault();event.stopPropagation();window.addCart(String('${esc(p.id)}'))" ${Number(p.stock||0)<=0?'disabled':''}>${Number(p.stock||0)<=0?'Out of Stock':'Add to Cart'}</button>
+    <button class="outline-btn" style="width:100%;margin-top:7px" onclick="event.preventDefault();event.stopPropagation();window.openProduct(String('${esc(p.id)}'))">View Details</button></div>
   </article>`
 }
 
@@ -283,15 +283,23 @@ async function loadLiveCatalog(){
   try{
     const [{data:cats,error:catErr},{data:ps,error:pErr},{data:bs,error:bErr}]=await Promise.all([
       sb.from('categories').select('*').order('name'),
-      sb.from('products').select('*,categories(name),shops(name)').eq('status','Active').order('created_at',{ascending:false}),
+      sb.from('products').select('*,categories(name)').eq('status','Active').order('created_at',{ascending:false}),
       sb.from('banner_ads').select('*').eq('active',true).order('sort_order',{ascending:true})
     ]);
     if(catErr) console.warn('Categories:',catErr.message);
     if(pErr) throw pErr;
     if(bErr) console.warn('Banners:',bErr.message);
     liveCategories=(cats||[]).map(c=>({id:c.id,name:c.name,emoji:c.icon||c.emoji||'📦'}));
+    const shopIds=[...new Set((ps||[]).map(p=>p.shop_id).filter(Boolean))];
+    let shopMap={};
+    if(shopIds.length){
+      const {data:shops,error:shopErr}=await sb.from('shops').select('id,name').in('id',shopIds);
+      if(shopErr) console.warn('Shops:',shopErr.message);
+      (shops||[]).forEach(sh=>{shopMap[String(sh.id)]=sh.name});
+    }
     const mapped=(ps||[]).map(p=>({
-      id:p.id,seller_id:p.seller_id,name:p.name,cat:p.categories?.name||'Other',shop:p.shops?.name||'Local Seller',
+      id:p.id,seller_id:p.seller_id,shop_id:p.shop_id,name:p.name,cat:p.categories?.name||'Other',
+      shop:shopMap[String(p.shop_id)]||'Local Seller',
       price:Number(p.price||0),old:Number(p.old_price||0),stock:Number(p.stock||0),
       emoji:p.emoji||'📦',rating:Number(p.rating||4.5),description:p.description||'',
       main_image_url:p.main_image_url||'',image:p.main_image_url||'',sku:p.sku||''
@@ -300,6 +308,9 @@ async function loadLiveCatalog(){
       products.length=0; mapped.forEach(x=>products.push(x));
     } else products.length=0;
     currentProducts=[...products];
+    state.cart=(state.cart||[]).filter(i=>findProduct(i.id));
+    state.wishlist=(state.wishlist||[]).filter(id=>findProduct(id));
+    save();
     liveBanners=bs||[];
     renderLiveCatalogUI();
     return true;
@@ -544,17 +555,10 @@ function setBottomActive(name){
 }
 function renderHomeProducts(){
   const el=document.getElementById('homeProducts');
-  if(el) el.innerHTML=products.slice(0,8).map(productCard).join('');
+  if(el) el.innerHTML=products.slice(0,8).map(liveProductCard).join('')||'<div style="padding:25px;color:var(--muted)">No live products available.</div>';
 }
 function productCard(p){
-  return `<article class="product">
-    <div class="pic"><button class="fav ${state.wishlist.includes(p.id)?'on':''}" onclick="event.stopPropagation();toggleWish(${p.id})">${state.wishlist.includes(p.id)?'♥':'♡'}</button>${p.emoji}</div>
-    <div class="pbody"><div class="shop">${esc(p.shop)}</div><h4>${esc(p.name)}</h4>
-    <div class="stars">★ ${p.rating} <span style="color:#8a9690">(${Math.floor(p.rating*31)})</span></div>
-    <div class="price">${money(p.price)} <span class="old">${money(p.old)}</span></div>
-    <small style="color:#7b8881">${p.stock} available</small>
-    <button class="add" onclick="event.stopPropagation();addCart(${p.id})">Add to Cart</button><button class="outline-btn" style="width:100%;margin-top:7px" onclick="event.stopPropagation();navigate('product',{id:${p.id}})">View Product</button></div>
-  </article>`;
+  return liveProductCard(p);
 }
 function pageHead(title){
   return `<div class="page-head"><button class="back-btn" onclick="goBack()">← Back</button><h2>${esc(title)}</h2></div>`;
