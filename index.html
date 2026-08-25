@@ -439,15 +439,66 @@ function updateBadges(){document.getElementById('cartBadge').textContent=state.c
 function resetProducts(){currentProducts=[...products];currentCategory='All';document.getElementById('productTitle').textContent='Popular Products';document.getElementById('search').value='';renderProducts()}
 function filterProducts(cat){currentCategory=cat;currentProducts=products.filter(p=>p.cat===cat|| (cat==='Deals'&&p.old>p.price));document.getElementById('productTitle').textContent=cat==='Deals'?'Deals & Offers':cat;renderProducts();document.getElementById('products').scrollIntoView({behavior:'smooth'})}
 function searchProducts(){let q=document.getElementById('search').value.trim().toLowerCase();currentProducts=products.filter(p=>(p.name+' '+p.shop+' '+p.cat).toLowerCase().includes(q));document.getElementById('productTitle').textContent=q?'Search Results':'Popular Products';renderProducts()}
-function addCart(id){let p=products.find(x=>x.id===id);let item=state.cart.find(x=>x.id===id);if(item)item.qty++;else state.cart.push({id,qty:1});save();toast('Added to cart ✓')}
-function removeCart(id){state.cart=state.cart.filter(x=>x.id!==id);save();openCart()}
-function changeQty(id,d){let x=state.cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)state.cart=state.cart.filter(i=>i.id!==id);save();openCart()}
+function findProduct(id){
+  const key=String(id);
+  return products.find(x=>String(x.id)===key)||null;
+}
+function addCart(id){
+  const key=String(id);
+  const p=findProduct(key);
+  if(!p){toast('Product not found. Please refresh.',true);return false;}
+  if(Number(p.stock||0)<=0){toast('Product is out of stock.',true);return false;}
+  if(!Array.isArray(state.cart))state.cart=[];
+  const item=state.cart.find(x=>String(x.id)===key);
+  if(item)item.qty=Number(item.qty||0)+1;
+  else state.cart.push({id:key,qty:1});
+  save(); updateBadges(); toast('Added to cart ✓');
+  return true;
+}
+function removeCart(id){
+  const key=String(id);
+  state.cart=(state.cart||[]).filter(x=>String(x.id)!==key);
+  save(); openCart();
+}
+function changeQty(id,d){
+  const key=String(id);
+  const x=(state.cart||[]).find(i=>String(i.id)===key);
+  if(!x)return;
+  x.qty=Number(x.qty||0)+Number(d||0);
+  if(x.qty<=0)state.cart=state.cart.filter(i=>String(i.id)!==key);
+  save(); openCart();
+}
 function toggleWish(id){let i=state.wishlist.indexOf(id);if(i>=0)state.wishlist.splice(i,1);else state.wishlist.push(id);save();renderProducts();toast(i>=0?'Removed from wishlist':'Added to wishlist ♥')}
 function closeModal(){document.getElementById('modalRoot').innerHTML=''}
 function modal(title,body,wide=false){document.getElementById('modalRoot').innerHTML=`<div class="modal-back" onclick="if(event.target===this)closeModal()"><div class="modal ${wide?'wide':''}"><div class="modal-head"><div style="display:flex;align-items:center;gap:8px"><button class="back-btn" style="padding:8px 11px" onclick="closeModal()">← Back</button><h3 style="margin:0">${title}</h3></div><button class="close" onclick="closeModal()">×</button></div><div style="margin-top:16px">${body}</div></div></div>`}
-function openProduct(id){let p=products.find(x=>x.id===id);modal(p.name,`<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px"><div class="pic" style="height:260px;border-radius:16px">${p.emoji}</div><div><div class="shop">${p.shop}</div><h2 style="margin:7px 0">${esc(p.name)}</h2><div class="stars">★ ${p.rating} • 128 Reviews</div><div class="price" style="font-size:27px">${money(p.price)} <span class="old">${money(p.old)}</span></div><p style="color:var(--muted)">Premium quality product from a trusted local Sukkur seller. Product specifications and details are provided by the seller.</p><p><b>Stock:</b> ${p.stock} available</p><div class="row"><button class="add" onclick="addCart(${p.id});closeModal()">Add to Cart</button><button class="gold-btn" onclick="buyNow(${p.id})">Buy Now</button></div><button class="outline-btn" style="width:100%;margin-top:9px" onclick="openSellerChat('${esc(p.shop)}')">💬 Chat with Seller</button></div></div><hr style="border:0;border-top:1px solid var(--line);margin:20px 0"><h4>Reviews & Ratings</h4><p>★ ★ ★ ★ ★ <b>4.6/5</b> — Customers are happy with this product.</p><h4>Delivery</h4><p style="color:var(--muted)">Delivery method will be shown at checkout. Seller delivery or Sukkur Bazar delivery may be available.</p>`)}
-function buyNow(id){addCart(id);closeModal();openCart()}
-function cartTotals(){let subtotal=state.cart.reduce((a,i)=>{let p=products.find(x=>x.id===i.id);return a+p.price*i.qty},0);return {subtotal,delivery:subtotal?150:0,total:subtotal+(subtotal?150:0)}}
+function openProduct(id){
+  const p=findProduct(id);
+  if(!p){toast('Product not found. Please refresh.',true);return;}
+  const pid=JSON.stringify(String(p.id));
+  const image=productImage(p);
+  modal(p.name,`<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    <div class="pic" style="height:260px;border-radius:16px;overflow:hidden">${image?`<img src="${esc(image)}" alt="${esc(p.name)}" style="width:100%;height:100%;object-fit:cover;display:block">`:'📦'}</div>
+    <div>
+      <div class="shop">${esc(p.shop)}</div>
+      <h2 style="margin:7px 0">${esc(p.name)}</h2>
+      <div class="stars">★ ${Number(p.rating||4.5).toFixed(1)}</div>
+      <div class="price" style="font-size:27px">${money(p.price)} ${Number(p.old||0)>Number(p.price||0)?`<span class="old">${money(p.old)}</span>`:''}</div>
+      <p style="color:var(--muted)">${esc(p.description||'Product details provided by the seller.')}</p>
+      <p><b>Stock:</b> ${Number(p.stock||0)} available</p>
+      <div class="row">
+        <button class="add" onclick="addCart(${pid});closeModal()">Add to Cart</button>
+        <button class="gold-btn" onclick="buyNow(${pid})">Buy Now</button>
+      </div>
+      <button class="outline-btn" style="width:100%;margin-top:9px" onclick="openSellerChat('${esc(p.shop)}')">💬 Chat with Seller</button>
+    </div>
+  </div>
+  <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+  <h4>Product Details</h4>
+  <p style="color:var(--muted)">SKU: ${esc(p.sku||'—')}</p>
+  <p style="color:var(--muted)">Category: ${esc(p.cat||'Other')}</p>`)}
+
+function buyNow(id){if(addCart(id)){closeModal();openCart();}}
+function cartTotals(){let subtotal=state.cart.reduce((a,i)=>{let p=findProduct(i.id);return a+(p?Number(p.price||0)*Number(i.qty||0):0)},0);return {subtotal,delivery:subtotal?150:0,total:subtotal+(subtotal?150:0)}}
 function openCart(){
  if(!state.cart.length){
    modal('Shopping Cart','<div style="text-align:center;padding:35px;color:var(--muted)">Your cart is empty 🛒</div>');
@@ -455,7 +506,7 @@ function openCart(){
  }
  let groups={};
  state.cart.forEach(i=>{
-   const p=products.find(x=>x.id===i.id);
+   const p=findProduct(i.id);
    if(!groups[p.shop])groups[p.shop]=[];
    groups[p.shop].push({item:i,product:p});
  });
@@ -463,7 +514,7 @@ function openCart(){
  Object.keys(groups).forEach(shop=>{
    let itemHtml='';
    groups[shop].forEach(({item,product:p})=>{
-     itemHtml+=`<div class="cart-item"><div class="cart-pic">${p.emoji}</div><div class="cart-info"><b>${esc(p.name)}</b><div class="price" style="font-size:15px">${money(p.price)}</div></div><div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><b>${item.qty}</b><button onclick="changeQty(${p.id},1)">+</button></div><button class="close" onclick="removeCart(${p.id})">×</button></div>`;
+     itemHtml+=`<div class="cart-item"><div class="cart-pic">${p.emoji}</div><div class="cart-info"><b>${esc(p.name)}</b><div class="price" style="font-size:15px">${money(p.price)}</div></div><div class="qty"><button onclick="changeQty('${esc(p.id)}',-1)">−</button><b>${item.qty}</b><button onclick="changeQty('${esc(p.id)}',1)">+</button></div><button class="close" onclick="removeCart('${esc(p.id)}')">×</button></div>`;
    });
    html+=`<div class="shop-group"><div class="shop-title">🏪 ${esc(shop)}</div>${itemHtml}</div>`;
  });
@@ -690,7 +741,7 @@ function openCheckout(){
   const t=cartTotals();
   const shops={};
   state.cart.forEach(i=>{
-    const p=products.find(x=>x.id===i.id);
+    const p=findProduct(i.id);
     if(!shops[p.shop])shops[p.shop]=[];
     shops[p.shop].push({p,qty:i.qty});
   });
@@ -743,7 +794,7 @@ function placeOrder(){
   const t=cartTotals();
   const grouped={};
   state.cart.forEach(i=>{
-    const p=products.find(x=>x.id===i.id);
+    const p=findProduct(i.id);
     if(!grouped[p.shop])grouped[p.shop]=[];
     grouped[p.shop].push({name:p.name,id:p.id,qty:i.qty,price:p.price});
   });
