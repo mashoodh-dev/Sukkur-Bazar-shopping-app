@@ -358,26 +358,64 @@ async function loadCustomerOrders(){
   state.orders=(data||[]).map(o=>({id:o.order_number||o.id,date:o.created_at?new Date(o.created_at).toLocaleString('en-PK'):'',customerName:o.customer_name||state.user?.name,customerPhone:o.customer_phone||state.user?.phone,shops:[{shop:'Sukkur Bazar',items:(o.order_items||[]).map(i=>({name:i.product_name,qty:Number(i.quantity||1),price:Number(i.price||0),id:i.product_id}))}],total:Number(o.total||0),payment:o.payment||'Cash on Delivery',delivery:o.delivery||'Sukkur Bazar Delivery',address:o.delivery_address||'',status:o.status||'New'}));
   save();
 }
+let authRedirectInProgress=false;
 async function gmailAuth(){
+  if(authRedirectInProgress)return;
+  authRedirectInProgress=true;
   try{
+    sessionStorage.setItem('sb_google_login','1');
     const redirectTo=window.location.origin+window.location.pathname;
-    const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo}});
+    const {error}=await sb.auth.signInWithOAuth({
+      provider:'google',
+      options:{redirectTo,queryParams:{access_type:'offline',prompt:'select_account'}}
+    });
     if(error)throw error;
-  }catch(e){toast(e.message||'Google login failed',true)}
+  }catch(e){
+    sessionStorage.removeItem('sb_google_login');
+    authRedirectInProgress=false;
+    toast(e.message||'Google login failed',true);
+  }
+}
+let authReady=false;
+let authListenerAttached=false;
+async function handleShoppingSession(session){
+  shoppingSession=session||null;
+  if(session?.user){
+    authReady=true;
+    sessionStorage.removeItem('sb_google_login');
+    authRedirectInProgress=false;
+    await ensureCustomerProfile(session.user);
+    await loadCustomerOrders();
+    const splash=document.getElementById('splash');
+    if(splash)splash.classList.add('hidden');
+    document.getElementById('authRoot')?.classList.add('hidden');
+    showHome();
+    return;
+  }
+  authReady=true;
 }
 async function initShoppingSupabase(){
   try{
+    // Attach the listener before getSession so OAuth callbacks cannot be missed.
+    if(!authListenerAttached){
+      authListenerAttached=true;
+      sb.auth.onAuthStateChange((event,session)=>{
+        if(session?.user){
+          setTimeout(()=>handleShoppingSession(session),0);
+        }else if(event==='SIGNED_OUT'){
+          shoppingSession=null;state.user=null;state.orders=[];save();
+          const splash=document.getElementById('splash');
+          if(splash)splash.classList.add('hidden');
+          document.getElementById('authRoot')?.classList.remove('hidden');
+          openAuth();
+        }
+      });
+    }
     const {data,error}=await sb.auth.getSession();
     if(error)console.warn(error.message);
-    shoppingSession=data?.session||null;
-    if(shoppingSession?.user){await ensureCustomerProfile(shoppingSession.user);await loadCustomerOrders()}
+    await handleShoppingSession(data?.session||null);
     await loadLiveCatalog();
   }catch(e){console.error(e)}
-  sb.auth.onAuthStateChange((event,session)=>{
-    shoppingSession=session||null;
-    if(session?.user){setTimeout(async()=>{await ensureCustomerProfile(session.user);await loadCustomerOrders();document.getElementById('authRoot')?.classList.add('hidden');showHome()},0)}
-    if(event==='SIGNED_OUT'){state.user=null;state.orders=[];save()}
-  });
 }
 
 let currentProducts=[...products], currentCategory='All';
@@ -581,7 +619,13 @@ function submitAuth(e,mode){
 // gmailAuth is provided by the live Supabase auth layer above.
 function openAccount(){
   if(!state.user){openAuth();return}
-  modal('My Account',`<div class="banner"><div><h3>${esc(state.user.name||'Customer')}</h3><p>${esc(state.user.phone||'')}</p></div><div style="font-size:42px">👤</div></div><div class="section"><button class="outline-btn" style="width:100%;margin:5px 0" onclick="closeModal();navigate('orders')">📦 My Orders</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openAddress()">📍 Addresses</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openWishlist()">♥ Wishlist</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openSupport()">🆘 Help & Support</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openSettings()">⚙️ Settings</button><button class="outline-btn" style="width:100%;margin:5px 0;color:#b33" onclick="state.user=null;save();closeModal();openAuth()">Logout</button></div>`);
+  modal('My Account',`<div class="banner"><div><h3>${esc(state.user.name||'Customer')}</h3><p>${esc(state.user.phone||'')}</p></div><div style="font-size:42px">👤</div></div><div class="section"><button class="outline-btn" style="width:100%;margin:5px 0" onclick="closeModal();navigate('orders')">📦 My Orders</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openAddress()">📍 Addresses</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openWishlist()">♥ Wishlist</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openSupport()">🆘 Help & Support</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openSettings()">⚙️ Settings</button><button class="outline-btn" style="width:100%;margin:5px 0;color:#b33" onclick="logoutCustomer()">Logout</button></div>`);
+}
+async function logoutCustomer(){
+  closeModal();
+  try{await sb.auth.signOut()}catch(e){console.warn('Sign out:',e)}
+  shoppingSession=null;state.user=null;state.orders=[];state.cart=[];save();
+  openAuth();
 }
 function showOrdersPage(push=true){
   if(push&&activePage!=='orders')pageHistory.push({name:'orders',data:{}});
@@ -780,7 +824,19 @@ function updateSetting(key,value){state.settings=state.settings||{};state.settin
 
 
 /* ===== LIVE DATABASE OVERRIDES ===== */
-function addCart(id){const p=products.find(x=>String(x.id)===String(id));if(!p)return toast('Product not found',true);if(Number(p.stock||0)<=0)return toast('Product is out of stock',true);let item=state.cart.find(x=>String(x.id)===String(id));if(item)item.qty++;else state.cart.push({id:p.id,qty:1});save();toast('Added to cart ✓')}
+function addCart(id){
+  const p=products.find(x=>String(x.id)===String(id));
+  if(!p)return toast('Product not found',true);
+  if(Number(p.stock||0)<=0)return toast('Product is out of stock',true);
+  if(!Array.isArray(state.cart))state.cart=[];
+  const key=String(p.id);
+  const item=state.cart.find(x=>String(x.id)===key);
+  if(item){item.qty=Math.max(1,Number(item.qty||0)+1)}
+  else{state.cart.push({id:p.id,qty:1})}
+  save();
+  updateBadges();
+  toast('Added to cart ✓');
+}
 function removeCart(id){state.cart=state.cart.filter(x=>String(x.id)!==String(id));save();openCart()}
 function changeQty(id,d){let x=state.cart.find(i=>String(i.id)===String(id));if(!x)return;x.qty+=d;if(x.qty<=0)state.cart=state.cart.filter(i=>String(i.id)!==String(id));save();openCart()}
 function cartTotals(){let subtotal=state.cart.reduce((a,i)=>{const p=products.find(x=>String(x.id)===String(i.id));return a+(p?Number(p.price||0)*Number(i.qty||0):0)},0);return {subtotal,delivery:subtotal?150:0,total:subtotal+(subtotal?150:0)}}
@@ -808,14 +864,21 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeDrawer
 
 
 /* Startup: splash -> login/signup for first-time users, otherwise home */
-function finishSplash(){
- const splash=document.getElementById('splash');
- if(splash)splash.classList.add('hidden');
- openAuth();
+async function finishSplash(){
+  const splash=document.getElementById('splash');
+  try{
+    const {data}=await sb.auth.getSession();
+    if(data?.session?.user){
+      await handleShoppingSession(data.session);
+      return;
+    }
+  }catch(e){console.warn('Splash session check:',e)}
+  if(splash)splash.classList.add('hidden');
+  if(!shoppingSession?.user)openAuth();
 }
-setTimeout(finishSplash,2600);
 renderCats();renderHomeProducts();updateBadges();
 initShoppingSupabase();
+setTimeout(finishSplash,2600);
 
 </script>
 </body>
