@@ -18,74 +18,192 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
 .logo-mark:before{content:"S";font-size:65px;font-weight:900;color:var(--gold)}.logo-mark:after{content:"";position:absolute;width:46px;height:16px;border:4px solid var(--green);border-top:0;bottom:13px;border-radius:0 0 20px 20px}
 .splash h1{margin:18px 0 5px;font-size:34px;letter-spacing:1px}.splash p{margin:0;color:#e8e5d8}.loader{width:90px;height:4px;background:rgba(255,255,255,.25);margin:25px auto 0;border-radius:10px;overflow:hidden}.loader i{display:block;height:100%;width:45%;background:var(--gold);animation:load 1.6s infinite}
 @keyframes load{to{transform:translateX(210%)}}@keyframes splashAutoHide{to{opacity:0;visibility:hidden;pointer-events:none}}@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
-.top{position:sticky;top:0;z-index:100;background:var(--green);color:white}.topbar{max-width:1200px;margin:auto;padding:12px 18px;display:flex;align-items:center;gap:15px}.brand{font-weight:900;font-size:21px;white-space:nowrap}.brand span{color:var(--gold)}.search{flex:1;position:relative}.search input{width:100%;padding:12px 45px 12px 15px;border-radius:13px;border:0;outline:0;background:#fff}.search button{position:absolute;right:4px;top:4px;width:36px;height:36px;border-radius:10px;background:var(--gold);color:#173126}.top-actions{display:flex;gap:8px}.icon-btn{background:rgba(255,255,255,.12);color:white;border-radius:12px;padding:10px 12px;position:relative}.badge{position:absolute;right:-4px;top:-5px;background:#e74c3c;color:#fff;border-radius:20px;font-size:10px;padding:3px 6px;font-weight:700}
-.nav{background:#fff;border-bottom:1px solid var(--line);overflow:auto}.nav-inner{max-width:1200px;margin:auto;display:flex;gap:5px;padding:8px 15px}.nav button{background:transparent;padding:9px 12px;border-radius:10px;color:var(--text);white-space:nowrap}.nav button.active,.nav button:hover{background:var(--cream);color:var(--green);font-weight:700}
-main{max-width:1200px;margin:auto;padding:18px}
 
-/* ===== HERO / BANNER - FIXED SIZE ===== */
-.hero{
-  border-radius:24px;overflow:hidden;background:linear-gradient(110deg,#0e5b3e,#1b7957);
-  color:white;padding:20px 30px;display:flex;justify-content:space-between;align-items:center;
-  min-height:180px;max-height:200px;height:180px;box-shadow:var(--shadow);
-  position:relative;
-}
-.hero .hero-text{flex:1;min-width:0}
-.hero .hero-text h2{font-size:28px;margin:0 0 4px;line-height:1.1}
-.hero .hero-text p{max-width:500px;color:#e7f1ec;font-size:14px;margin:0 0 6px}
-.hero .hero-art{font-size:70px;opacity:.9;flex-shrink:0;margin-left:10px}
-.hero .hero-art img{max-height:150px;max-width:280px;border-radius:14px;object-fit:cover}
-@media(max-width:620px){
-  .hero{height:auto;min-height:150px;padding:16px 20px;flex-wrap:wrap}
-  .hero .hero-text h2{font-size:22px}
-  .hero .hero-art{font-size:50px}
-  .hero .hero-art img{max-height:100px;max-width:150px}
-}
-@media(max-width:430px){.hero .hero-art img{max-height:80px;max-width:120px}}
+/* ===== TOP BAR WITH PROFILE PIC ===== */
+.top{position:sticky;top:0;z-index:100;background:var(--green);color:white}
+.topbar{max-width:1200px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:900;font-size:20px;white-space:nowrap}
+.brand span{color:var(--gold)}
+.search{flex:1;position:relative;min-width:120px}
+.search input{width:100%;padding:10px 40px 10px 14px;border-radius:12px;border:0;outline:0;background:#fff;font-size:14px}
+.search button{position:absolute;right:4px;top:4px;width:32px;height:32px;border-radius:8px;background:var(--gold);color:#173126;border:0;cursor:pointer}
+.top-actions{display:flex;gap:6px;align-items:center}
+.icon-btn{background:rgba(255,255,255,.12);color:white;border-radius:12px;padding:8px 10px;position:relative;border:0;cursor:pointer;font-size:16px}
+.icon-btn .badge{position:absolute;right:-4px;top:-4px;background:#e74c3c;color:#fff;border-radius:20px;font-size:9px;padding:2px 6px;font-weight:700}
 
-.gold-btn{background:var(--gold);color:#183526;padding:10px 16px;border-radius:12px;font-weight:800}
-.outline-btn{background:#fff;border:1px solid var(--line);color:var(--green);padding:10px 14px;border-radius:11px;font-weight:700}
-.section{margin-top:24px}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.section h3{margin:0;font-size:20px}.link{background:none;color:var(--green);font-weight:700}
-.cats{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}.cat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 7px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.03);cursor:pointer;transition:.2s}.cat:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.cat .emoji{font-size:30px}.cat b{display:block;font-size:12px;margin-top:7px}.cat img{width:50px;height:50px;border-radius:12px;object-fit:cover;display:block;margin:0 auto 6px}
-.deals{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.deal{background:#fff;border-radius:16px;padding:16px;border:1px solid var(--line);position:relative}.deal strong{color:var(--danger);font-size:22px}.deal small{display:block;color:var(--muted);margin-top:4px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.product{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;position:relative;box-shadow:0 3px 12px rgba(0,0,0,.03)}.pic{height:180px;background:linear-gradient(135deg,#eef6f1,#f9f1d7);display:grid;place-items:center;font-size:72px;position:relative;overflow:hidden}.pic img{width:100%;height:100%;object-fit:cover}.fav{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;background:#fff;color:#8a9690;box-shadow:0 3px 12px #0001}.fav.on{color:#d33}.pbody{padding:13px}.shop{font-size:11px;color:var(--green);font-weight:700}.product h4{margin:5px 0;font-size:15px;line-height:1.3}.stars{color:#e4a817;font-size:12px}.price{font-size:19px;font-weight:900;color:var(--green);margin-top:6px}.old{text-decoration:line-through;color:#9aa39f;font-size:12px;margin-left:6px}.add{width:100%;margin-top:10px;background:var(--green);color:#fff;padding:10px;border-radius:10px;font-weight:800}
-.banner{background:var(--cream);border-radius:20px;padding:22px;display:flex;justify-content:space-between;align-items:center}.banner h3{margin:0 0 5px}.banner p{margin:0;color:var(--muted)}
-footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}.footer-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:25px}.footer h4{margin-top:0;color:#fff}.footer a{display:block;color:#c7d9d1;margin:9px 0;font-size:13px;text-decoration:none;cursor:pointer}.footer a:hover{color:var(--gold)}.copy{text-align:center;border-top:1px solid #ffffff22;margin-top:25px;padding-top:18px;font-size:12px;color:#a9c0b5}
-.modal-back{position:fixed;inset:0;background:#0008;z-index:500;display:flex;align-items:flex-end;justify-content:center;padding:10px}.modal{background:#fff;width:min(680px,100%);max-height:92vh;overflow:auto;border-radius:24px 24px 12px 12px;padding:20px;box-shadow:0 20px 70px #0005}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{background:#f0f3f1;width:36px;height:36px;border-radius:50%}.form{display:grid;gap:11px}.form input,.form select,.form textarea{width:100%;padding:12px;border:1px solid #dbe3df;border-radius:11px;outline:0}.form label{font-size:12px;font-weight:700}.row{display:flex;gap:10px}.row>*{flex:1}.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}.cart-pic{width:58px;height:58px;border-radius:12px;background:var(--cream);display:grid;place-items:center;font-size:28px}.cart-info{flex:1}.qty{display:flex;align-items:center;gap:8px}.qty button{width:28px;height:28px;border-radius:8px;background:#edf3ef;color:var(--green);font-weight:900}
-.summary{background:#f7faf8;padding:15px;border-radius:14px;margin-top:14px}.summary div{display:flex;justify-content:space-between;margin:8px 0}.summary .total{font-weight:900;font-size:19px;border-top:1px solid var(--line);padding-top:10px}
-.shop-group{border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}.shop-title{font-weight:900;color:var(--green);margin-bottom:5px}
-.toast{position:fixed;right:18px;bottom:18px;background:#123e2e;color:#fff;padding:13px 16px;border-radius:13px;box-shadow:var(--shadow);z-index:900;max-width:320px;animation:slide .25s ease}.toast.error{background:#a73737}@keyframes slide{from{transform:translateY(15px);opacity:0}to{transform:none;opacity:1}}
-.chat{position:fixed;right:18px;bottom:18px;z-index:200}.chat-fab{width:58px;height:58px;border-radius:50%;background:var(--gold);color:#123e2e;font-size:24px;box-shadow:0 8px 25px #0003}.chatbox{position:absolute;right:0;bottom:70px;width:330px;background:#fff;border-radius:18px;box-shadow:0 15px 50px #0003;border:1px solid var(--line);overflow:hidden}.chat-head{background:var(--green);color:#fff;padding:14px;font-weight:800}.messages{height:280px;overflow:auto;padding:12px;background:#f4f7f5}.msg{max-width:78%;padding:9px 11px;border-radius:12px;margin:7px 0;font-size:13px}.msg.me{background:var(--green);color:#fff;margin-left:auto}.msg.seller{background:#fff;border:1px solid var(--line)}.chat-send{display:flex;padding:8px;gap:7px}.chat-send input{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px}
-.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);overflow:auto;margin-bottom:15px}.tabs button{padding:10px 13px;background:none;white-space:nowrap}.tabs button.active{color:var(--green);font-weight:800;border-bottom:2px solid var(--gold)}
-.order{border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:10px}.order-top{display:flex;justify-content:space-between}.status{font-size:11px;background:#e7f4ed;color:var(--green);padding:5px 8px;border-radius:10px;font-weight:800}
-@media(max-width:900px){.cats{grid-template-columns:repeat(4,1fr)}.grid{grid-template-columns:repeat(3,1fr)}.deals{grid-template-columns:repeat(2,1fr)}.footer-inner{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.page-screen .grid{grid-template-columns:repeat(2,1fr)}.page-screen [style*="grid-template-columns:minmax(260px,1fr)"]{grid-template-columns:1fr!important}.topbar{flex-wrap:wrap;padding:9px 10px}.brand{font-size:18px}.search{order:3;flex-basis:100%}.top-actions{margin-left:auto}.hero{padding:16px 18px;min-height:130px}.hero .hero-text h2{font-size:20px}.hero .hero-art{display:none}main{padding:12px}.cats{grid-template-columns:repeat(4,1fr);gap:7px}.cat{padding:10px 4px}.cat .emoji{font-size:22px}.grid{grid-template-columns:repeat(2,1fr);gap:9px}.pic{height:145px;font-size:55px}.pbody{padding:10px}.product h4{font-size:13px}.deals{gap:8px}.banner{padding:17px;flex-direction:column;text-align:center;gap:12px}.footer-inner{grid-template-columns:1fr 1fr}.modal{padding:16px}.chatbox{width:min(330px,calc(100vw - 30px))}.chat{right:12px;bottom:12px}}
+/* ===== PROFILE PIC ===== */
+.profile-pic{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:18px;overflow:hidden;border:2px solid rgba(255,255,255,.3);cursor:pointer}
+.profile-pic img{width:100%;height:100%;object-fit:cover}
+.profile-pic .default-icon{font-size:18px;color:#fff}
+
+/* ===== BANNER SLIDER ===== */
+.banner-slider{position:relative;width:100%;overflow:hidden;border-radius:0;margin:0 -18px;width:calc(100% + 36px)}
+.banner-slider .slides{display:flex;transition:transform 0.5s ease}
+.banner-slider .slide{min-width:100%;height:280px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0e5b3e,#1b7957);color:#fff;padding:20px 30px;position:relative}
+.banner-slider .slide .slide-content{flex:1;min-width:0}
+.banner-slider .slide h2{font-size:28px;margin:0 0 6px}
+.banner-slider .slide p{color:#e7f1ec;font-size:14px;margin:0 0 10px;max-width:500px}
+.banner-slider .slide .slide-img{font-size:70px;flex-shrink:0;margin-left:10px}
+.banner-slider .slide .slide-img img{max-height:180px;max-width:260px;border-radius:14px;object-fit:cover}
+.banner-slider .dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
+.banner-slider .dots .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:.3s;border:0}
+.banner-slider .dots .dot.active{background:#fff;transform:scale(1.2)}
+@media(max-width:620px){.banner-slider .slide{height:200px;padding:16px 18px}
+.banner-slider .slide h2{font-size:20px}
+.banner-slider .slide .slide-img{font-size:40px}
+.banner-slider .slide .slide-img img{max-height:100px;max-width:140px}
+.banner-slider{margin:0;width:100%}}
+@media(max-width:430px){.banner-slider .slide{height:170px}
+.banner-slider .slide h2{font-size:17px}
+.banner-slider .slide p{font-size:12px}
+.banner-slider .slide .slide-img img{max-height:70px;max-width:100px}}
+
+.gold-btn{background:var(--gold);color:#183526;padding:10px 18px;border-radius:12px;font-weight:800;border:0;cursor:pointer}
+.outline-btn{background:#fff;border:1px solid var(--line);color:var(--green);padding:10px 14px;border-radius:11px;font-weight:700;cursor:pointer}
+
+.section{margin-top:24px}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section h3{margin:0;font-size:20px}
+.link{background:none;color:var(--green);font-weight:700;border:0;cursor:pointer}
+
+.cats{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
+.cat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 7px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.03);cursor:pointer;transition:.2s}
+.cat:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.cat .emoji{font-size:30px;display:block}
+.cat b{display:block;font-size:12px;margin-top:7px}
+.cat img{width:50px;height:50px;border-radius:12px;object-fit:cover;display:block;margin:0 auto 6px}
+@media(max-width:900px){.cats{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:620px){.cats{grid-template-columns:repeat(4,1fr);gap:7px}
+.cat{padding:10px 4px}
+.cat .emoji{font-size:22px}}
+
+.deals{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.deal{background:#fff;border-radius:16px;padding:16px;border:1px solid var(--line);position:relative}
+.deal strong{color:var(--danger);font-size:22px;display:block}
+.deal small{display:block;color:var(--muted);margin-top:4px}
+@media(max-width:900px){.deals{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.deals{gap:8px}}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.product{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;position:relative;box-shadow:0 3px 12px rgba(0,0,0,.03)}
+.pic{height:180px;background:linear-gradient(135deg,#eef6f1,#f9f1d7);display:grid;place-items:center;font-size:72px;position:relative;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:cover}
+.fav{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;background:#fff;color:#8a9690;box-shadow:0 3px 12px #0001;border:0;cursor:pointer}
+.fav.on{color:#d33}
+.pbody{padding:13px}
+.pbody .shop{font-size:11px;color:var(--green);font-weight:700}
+.pbody h4{margin:5px 0;font-size:15px;line-height:1.3}
+.pbody .stars{color:#e4a817;font-size:12px}
+.pbody .price{font-size:19px;font-weight:900;color:var(--green);margin-top:6px}
+.pbody .old{text-decoration:line-through;color:#9aa39f;font-size:12px;margin-left:6px}
+.add{width:100%;margin-top:10px;background:var(--green);color:#fff;padding:10px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.grid{grid-template-columns:repeat(2,1fr);gap:9px}
+.pic{height:145px;font-size:55px}
+.pbody{padding:10px}
+.pbody h4{font-size:13px}}
+
+.banner{background:var(--cream);border-radius:20px;padding:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.banner h3{margin:0 0 5px}
+.banner p{margin:0;color:var(--muted)}
+
+/* ===== FOOTER WITH SOCIAL LINKS ===== */
+footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
+.footer-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:25px}
+.footer-inner h4{margin-top:0;color:#fff}
+.footer-inner a{display:block;color:#c7d9d1;margin:8px 0;font-size:13px;text-decoration:none;cursor:pointer}
+.footer-inner a:hover{color:var(--gold)}
+.footer-social{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.footer-social a{background:rgba(255,255,255,.08);padding:6px 12px;border-radius:20px;font-size:12px;display:inline-block}
+.footer-social a:hover{background:rgba(255,255,255,.15)}
+.copy{text-align:center;border-top:1px solid #ffffff22;margin-top:25px;padding-top:18px;font-size:12px;color:#a9c0b5}
+@media(max-width:620px){.footer-inner{grid-template-columns:1fr 1fr}}
+
+.modal-back{position:fixed;inset:0;background:#0008;z-index:500;display:flex;align-items:flex-end;justify-content:center;padding:10px}
+.modal{background:#fff;width:min(680px,100%);max-height:92vh;overflow:auto;border-radius:24px 24px 12px 12px;padding:20px;box-shadow:0 20px 70px #0005}
+.modal-head{display:flex;justify-content:space-between;align-items:center}
+.close{background:#f0f3f1;width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;font-size:20px}
+.form{display:grid;gap:11px}
+.form input,.form select,.form textarea{width:100%;padding:12px;border:1px solid #dbe3df;border-radius:11px;outline:0}
+.form label{font-size:12px;font-weight:700}
+.row{display:flex;gap:10px}
+.row>*{flex:1}
+
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}
+.cart-pic{width:58px;height:58px;border-radius:12px;background:var(--cream);display:grid;place-items:center;font-size:28px}
+.cart-info{flex:1}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:28px;height:28px;border-radius:8px;background:#edf3ef;color:var(--green);font-weight:900;border:0;cursor:pointer}
+.summary{background:#f7faf8;padding:15px;border-radius:14px;margin-top:14px}
+.summary div{display:flex;justify-content:space-between;margin:8px 0}
+.summary .total{font-weight:900;font-size:19px;border-top:1px solid var(--line);padding-top:10px}
+.shop-group{border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+.shop-title{font-weight:900;color:var(--green);margin-bottom:5px}
+
+.toast{position:fixed;right:18px;bottom:18px;background:#123e2e;color:#fff;padding:13px 16px;border-radius:13px;box-shadow:var(--shadow);z-index:900;max-width:320px;animation:slide .25s ease}
+.toast.error{background:#a73737}
+@keyframes slide{from{transform:translateY(15px);opacity:0}to{transform:none;opacity:1}}
+
+.chat{position:fixed;right:18px;bottom:18px;z-index:200}
+.chat-fab{width:58px;height:58px;border-radius:50%;background:var(--gold);color:#123e2e;font-size:24px;box-shadow:0 8px 25px #0003;border:0;cursor:pointer}
+.chatbox{position:absolute;right:0;bottom:70px;width:330px;background:#fff;border-radius:18px;box-shadow:0 15px 50px #0003;border:1px solid var(--line);overflow:hidden}
+.chat-head{background:var(--green);color:#fff;padding:14px;font-weight:800}
+.messages{height:280px;overflow:auto;padding:12px;background:#f4f7f5}
+.msg{max-width:78%;padding:9px 11px;border-radius:12px;margin:7px 0;font-size:13px}
+.msg.me{background:var(--green);color:#fff;margin-left:auto}
+.msg.seller{background:#fff;border:1px solid var(--line)}
+.chat-send{display:flex;padding:8px;gap:7px}
+.chat-send input{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px}
+.chat-send button{padding:8px 12px;border-radius:10px;background:var(--gold);color:#173126;font-weight:800;border:0;cursor:pointer}
+
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);overflow:auto;margin-bottom:15px}
+.tabs button{padding:10px 13px;background:none;white-space:nowrap;border:0;cursor:pointer}
+.tabs button.active{color:var(--green);font-weight:800;border-bottom:2px solid var(--gold)}
+.order{border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:10px}
+.order-top{display:flex;justify-content:space-between}
+.status{font-size:11px;background:#e7f4ed;color:var(--green);padding:5px 8px;border-radius:10px;font-weight:800}
+
+/* ===== NAV / BOTTOM ===== */
 .app-screen{min-height:55vh}
 .page-screen{max-width:1200px;margin:auto;padding:16px 18px 90px}
 .page-head{display:flex;align-items:center;gap:10px;margin-bottom:15px}
-.back-btn{background:#fff;border:1px solid var(--line);color:var(--green);border-radius:11px;padding:10px 14px;font-weight:800}
+.back-btn{background:#fff;border:1px solid var(--line);color:var(--green);border-radius:11px;padding:10px 14px;font-weight:800;cursor:pointer}
 .page-head h2{margin:0;font-size:22px}
-.bottom-nav{position:fixed;left:0;right:0;bottom:0;height:68px;background:#fff;border-top:1px solid var(--line);z-index:180;display:flex;justify-content:center;box-shadow:0 -5px 18px #0000000d}
+
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;height:65px;background:#fff;border-top:1px solid var(--line);z-index:180;display:flex;justify-content:center;box-shadow:0 -5px 18px #0000000d}
 .bottom-nav-inner{width:min(620px,100%);display:grid;grid-template-columns:repeat(5,1fr)}
-.bottom-nav button{background:#fff;color:#718078;font-size:11px;font-weight:700;padding:7px 2px;position:relative}
-.bottom-nav button .bi{display:block;font-size:21px;line-height:23px}
+.bottom-nav button{background:#fff;color:#718078;font-size:10px;font-weight:700;padding:6px 2px;position:relative;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.bottom-nav button .bi{font-size:20px;line-height:1.2}
 .bottom-nav button.active{color:var(--green)}
 .bottom-nav button.active:after{content:"";position:absolute;left:25%;right:25%;bottom:4px;height:3px;background:var(--gold);border-radius:4px}
-.drawer-back{position:fixed;inset:0;background:#0007;z-index:600}.drawer{position:absolute;left:0;top:0;bottom:0;width:min(330px,88vw);background:#fff;box-shadow:15px 0 40px #0004;padding:18px;overflow:auto}
+
+.drawer-back{position:fixed;inset:0;background:#0007;z-index:600;display:none}
+.drawer{position:absolute;left:0;top:0;bottom:0;width:min(330px,88vw);background:#fff;box-shadow:15px 0 40px #0004;padding:18px;overflow:auto}
 .drawer-brand{background:linear-gradient(135deg,#0e5b3e,#16704e);color:#fff;border-radius:18px;padding:18px;margin-bottom:15px}
-.drawer-brand b{font-size:21px}.drawer-brand span{color:var(--gold)}
-.drawer a{display:flex;align-items:center;gap:12px;padding:13px;border-radius:11px;color:var(--text);font-weight:700;margin:3px 0;text-decoration:none;cursor:pointer}
+.drawer-brand b{font-size:21px}
+.drawer-brand span{color:var(--gold)}
+.drawer a{display:flex;align-items:center;gap:12px;padding:13px;border-radius:11px;color:var(--text);font-weight:700;text-decoration:none;cursor:pointer;margin:3px 0}
 .drawer a:hover{background:var(--cream);color:var(--green)}
-.menu-trigger{background:rgba(255,255,255,.12);color:#fff;border-radius:12px;padding:10px 12px;font-size:20px}
-.auth-screen{position:fixed;inset:0;z-index:850;background:linear-gradient(145deg,#0a4d35,#0e5b3e);display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}
-.auth-card{width:min(430px,100%);background:#fff;border-radius:25px;padding:24px;box-shadow:0 20px 70px #0005}
+.menu-trigger{background:rgba(255,255,255,.12);color:#fff;border-radius:12px;padding:8px 10px;font-size:20px;border:0;cursor:pointer}
+
+.auth-screen{position:fixed;inset:0;z-index:99999;background:linear-gradient(145deg,#075b3d,#0c6b49);display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}
+.auth-card{width:min(430px,100%);background:#fff;border-radius:25px;padding:24px;box-shadow:0 20px 70px #0005;max-height:92vh;overflow:auto}
 .auth-logo{width:70px;height:70px;border-radius:20px;background:var(--green);display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:45px;margin:0 auto 12px}
-.auth-card h2{text-align:center;margin:5px 0}.auth-card>p{text-align:center;color:var(--muted);font-size:13px}
-.auth-tabs{display:flex;background:#f1f5f3;border-radius:12px;padding:4px;margin:16px 0}.auth-tabs button{flex:1;padding:10px;border-radius:9px;background:transparent;color:var(--muted);font-weight:800}.auth-tabs button.active{background:#fff;color:var(--green);box-shadow:0 2px 8px #0000000d}
+.auth-card h2{text-align:center;margin:5px 0}
+.auth-card>p{text-align:center;color:var(--muted);font-size:13px}
+.auth-tabs{display:flex;background:#f1f5f3;border-radius:12px;padding:4px;margin:16px 0}
+.auth-tabs button{flex:1;padding:10px;border-radius:9px;background:transparent;color:var(--muted);font-weight:800;border:0;cursor:pointer}
+.auth-tabs button.active{background:#fff;color:var(--green);box-shadow:0 2px 8px #0000000d}
+
 .search-results-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .result-category{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.result-category .emoji{font-size:28px}.result-category b{display:block}.result-category small{color:var(--muted)}
-.sortbar{display:flex;gap:8px;overflow:auto;margin-bottom:14px}.sortbar button{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;white-space:nowrap}.sortbar button.active{background:var(--green);color:#fff;border-color:var(--green)}
-@media(max-width:620px){.page-screen{padding:12px 12px 88px}.bottom-nav{height:65px}.bottom-nav button .bi{font-size:20px}}
+.result-category .emoji{font-size:28px}
+.result-category b{display:block}
+.result-category small{color:var(--muted)}
+.sortbar{display:flex;gap:8px;overflow:auto;margin-bottom:14px}
+.sortbar button{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;white-space:nowrap;cursor:pointer}
+.sortbar button.active{background:var(--green);color:#fff;border-color:var(--green)}
+
 html,body{max-width:100%;overflow-x:hidden}
 .modal{max-width:calc(100vw - 24px);box-sizing:border-box}
 .modal-back{padding:12px;box-sizing:border-box}
@@ -93,13 +211,8 @@ html,body{max-width:100%;overflow-x:hidden}
 @media(max-width:700px){
   .page-screen{overflow-x:hidden}
   .page-screen .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .page-screen [style*="grid-template-columns:minmax(260px,1fr)"]{grid-template-columns:1fr!important}
-  .page-screen [style*="height:330px"]{height:240px!important;font-size:78px!important}
-  .page-screen h1{font-size:23px!important;overflow-wrap:anywhere}
   .page-screen .row{flex-wrap:wrap}
   .page-screen .row>*{flex:1 1 145px}
-  .modal [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
-  .modal [style*="height:260px"]{height:210px!important}
   .modal .row{flex-wrap:wrap}
   .modal .row>*{flex:1 1 140px}
 }
@@ -118,7 +231,6 @@ html,body{max-width:100%;overflow-x:hidden}
   #pageRoot .product-detail .price{font-size:25px!important}
   #pageRoot .product-detail .row{display:flex;gap:8px;flex-wrap:wrap}
   #pageRoot .product-detail .row>*{min-width:0;flex:1 1 140px}
-  #pageRoot .product-detail .outline-btn{box-sizing:border-box}
 }
 .order-detail-box{width:100%;box-sizing:border-box}
 .order-detail-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
@@ -126,12 +238,8 @@ html,body{max-width:100%;overflow-x:hidden}
 .customer-box>div{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-top:1px solid #e3ebe6}
 .customer-box>div:first-of-type{border-top:0}
 .customer-box span{text-align:right;overflow-wrap:anywhere}
-@media(max-width:500px){
-  .customer-box>div{display:block}
-  .customer-box span{display:block;text-align:left;margin-top:3px}
-}
-.auth-screen{position:fixed!important;inset:0!important;z-index:99999!important;display:flex!important;align-items:center!important;justify-content:center!important;background:linear-gradient(145deg,#075b3d,#0c6b49)!important;padding:18px!important;box-sizing:border-box}
-.auth-card{width:min(430px,100%)!important;max-height:92vh!important;overflow:auto!important}
+@media(max-width:500px){.customer-box>div{display:block}
+.customer-box span{display:block;text-align:left;margin-top:3px}}
 </style>
 </head>
 <body>
@@ -148,26 +256,26 @@ html,body{max-width:100%;overflow-x:hidden}
   <div class="topbar">
     <button class="menu-trigger" onclick="openDrawer()" aria-label="Menu">☰</button>
     <div class="brand">SUKKUR <span>BAZAR</span></div>
-    <div class="search"><input id="search" placeholder="Search products, shops & categories..." onkeydown="if(event.key==='Enter')searchProducts()" oninput="searchProducts()"><button onclick="searchProducts()">⌕</button></div>
+    <div class="search"><input id="search" placeholder="Search products..." onkeydown="if(event.key==='Enter')searchProducts()" oninput="searchProducts()"><button onclick="searchProducts()">⌕</button></div>
     <div class="top-actions">
       <button class="icon-btn" onclick="openWishlist()" aria-label="Wishlist">♡<span id="wishBadge" class="badge">0</span></button>
       <button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span id="cartBadge" class="badge">0</span></button>
-      <button class="icon-btn" onclick="openAccount()" aria-label="Account">👤</button>
+      <div class="profile-pic" id="profilePic" onclick="openAccount()">
+        <span class="default-icon">👤</span>
+      </div>
     </div>
   </div>
 </header>
-<nav class="nav"><div class="nav-inner" id="catNav"></div></nav>
 
 <main id="homeScreen" class="app-screen">
-  <section class="hero" id="heroSection">
-    <div class="hero-text">
-      <div style="color:#d4af37;font-weight:800;margin-bottom:7px">WELCOME TO SUKKUR BAZAR</div>
-      <h2>Har Zaroorat,<br>Ab Aapke Shehar Mein</h2>
-      <p>Shop from local Sukkur sellers — grocery, fashion, cosmetics, electronics, health and much more, all in one place.</p>
-      <button class="gold-btn" onclick="navigate('categories')">Shop by Category</button>
+  <!-- ===== BANNER SLIDER ===== -->
+  <div class="banner-slider" id="bannerSlider">
+    <div class="slides" id="bannerSlides">
+      <!-- Slides will be rendered by JavaScript -->
     </div>
-    <div class="hero-art">🛍️</div>
-  </section>
+    <div class="dots" id="bannerDots"></div>
+  </div>
+
   <section class="section">
     <div class="section-head"><h3>Shop by Category</h3><button class="link" onclick="navigate('categories')">View All</button></div>
     <div class="cats" id="categories"></div>
@@ -218,12 +326,15 @@ html,body{max-width:100%;overflow-x:hidden}
 
 <div id="authRoot" class="hidden"></div>
 
+<!-- ===== FOOTER WITH SOCIAL LINKS ===== -->
 <footer id="siteFooter">
   <div class="footer-inner">
     <div><h4>SUKKUR BAZAR</h4><p>Har Zaroorat, Ab Aapke Shehar Mein.</p><p style="font-size:12px;color:#abc0b7">A local multi-shop marketplace made for Sukkur.</p></div>
     <div><h4>Shopping</h4><a onclick="resetProducts()">All Products</a><a onclick="showAllCategories()">Categories</a><a onclick="openWishlist()">Wishlist</a><a onclick="openCart()">Cart</a></div>
     <div><h4>My Account</h4><a onclick="openAccount()">Profile</a><a onclick="openOrders()">My Orders</a><a onclick="openAddress()">Addresses</a></div>
-    <div><h4>Support</h4><a onclick="openSupport()">Help & Support</a><a onclick="openChat()">Chat with Seller</a></div>
+    <div><h4>Support</h4><a onclick="openSupport()">Help & Support</a><a onclick="openChat()">Chat with Seller</a>
+      <div class="footer-social" id="footerSocial"></div>
+    </div>
   </div>
   <div class="copy">© 2026 Sukkur Bazar. All rights reserved.</div>
 </footer>
@@ -268,7 +379,7 @@ let products=[
 ];
 let state=JSON.parse(localStorage.getItem(KEY)||'null')||{cart:[],wishlist:[],orders:[],user:null,addresses:[],chats:[]};
 
-/* ===== SUPABASE CONNECTION ===== */
+/* ===== SUPABASE ===== */
 const SUPABASE_URL='https://xltyakylnntzlxhcggil.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_obLweb6F_j_8Q_tpTjWZpQ_PJG3Tt1I';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
@@ -277,6 +388,7 @@ let liveCategories=[];
 let liveBanners=[];
 let liveDeals=[];
 let liveSupport={};
+let userProfilePic='';
 
 function productImage(p){return p.image||p.main_image_url||p.images?.[0]||''}
 function liveProductCard(p){
@@ -287,46 +399,82 @@ function liveProductCard(p){
     <div class="pbody"><div class="shop">${esc(p.shop||'Local Seller')}</div><h4>${esc(p.name)}</h4>
     <div class="stars">★ ${Number(p.rating||4.5).toFixed(1)}</div>
     <div class="price">${money(p.price)} ${old>p.price?`<span class="old">${money(old)}</span>`:''}</div><small style="color:#7b8881">${Number(p.stock||0)} available</small>
-    <button class="add" onclick="event.preventDefault();event.stopPropagation();window.addCart('${esc(p.id)}')" ${Number(p.stock||0)<=0?'disabled':''}>${Number(p.stock||0)<=0?'Out of Stock':'Add to Cart'}</button>
-    <button class="outline-btn" style="width:100%;margin-top:7px" onclick="event.preventDefault();event.stopPropagation();window.openProduct('${esc(p.id)}')">View Details</button></div>
+    <button class="add" onclick="event.preventDefault();event.stopPropagation();window.addCart(String('${esc(p.id)}'))" ${Number(p.stock||0)<=0?'disabled':''}>${Number(p.stock||0)<=0?'Out of Stock':'Add to Cart'}</button>
+    <button class="outline-btn" style="width:100%;margin-top:7px" onclick="event.preventDefault();event.stopPropagation();window.openProduct(String('${esc(p.id)}'))">View Details</button></div>
   </article>`
 }
 
-// ===== RENDER DYNAMIC BANNERS =====
-function renderLiveBanners(){
-  const hero=document.getElementById('heroSection');
-  if(!hero)return;
-  if(liveBanners && liveBanners.length>0){
-    const b=liveBanners[0];
-    const title=b.title||b.heading||b.name||'Sukkur Bazar';
-    const sub=b.description||b.subtitle||b.text||'';
-    const img=b.image_url||b.image||b.banner_url||'';
-    hero.innerHTML=`
-      <div class="hero-text">
-        <div style="color:#d4af37;font-weight:800;margin-bottom:7px">WELCOME TO SUKKUR BAZAR</div>
-        <h2>${esc(title)}</h2>
-        <p>${esc(sub)}</p>
-        ${b.link_url?`<button class="gold-btn" onclick="window.location.href='${esc(b.link_url)}'">Shop Now</button>`:''}
+// ===== BANNER SLIDER =====
+let bannerIndex = 0;
+let bannerInterval = null;
+
+function renderBannerSlider(){
+  const container = document.getElementById('bannerSlides');
+  const dotsContainer = document.getElementById('bannerDots');
+  if(!container || !dotsContainer) return;
+  
+  const banners = liveBanners.length > 0 ? liveBanners : [{title:'Sukkur Bazar', description:'Har Zaroorat, Ab Aapke Shehar Mein', image_url:'', link_url:''}];
+  
+  container.innerHTML = banners.map(b => `
+    <div class="slide">
+      <div class="slide-content">
+        <h2>${esc(b.title || 'Sukkur Bazar')}</h2>
+        <p>${esc(b.description || 'Har Zaroorat, Ab Aapke Shehar Mein')}</p>
+        ${b.link_url ? `<button class="gold-btn" onclick="window.location.href='${esc(b.link_url)}'">Shop Now</button>` : ''}
       </div>
-      <div class="hero-art">${img?`<img src="${esc(img)}" alt="Banner">`:'🛍️'}</div>
-    `;
-  } else {
-    // Default hero if no banners
-    hero.innerHTML=`
-      <div class="hero-text">
-        <div style="color:#d4af37;font-weight:800;margin-bottom:7px">WELCOME TO SUKKUR BAZAR</div>
-        <h2>Har Zaroorat,<br>Ab Aapke Shehar Mein</h2>
-        <p>Shop from local Sukkur sellers — grocery, fashion, cosmetics, electronics, health and much more, all in one place.</p>
-        <button class="gold-btn" onclick="navigate('categories')">Shop by Category</button>
-      </div>
-      <div class="hero-art">🛍️</div>
-    `;
-  }
+      <div class="slide-img">${b.image_url ? `<img src="${esc(b.image_url)}" alt="Banner">` : '🛍️'}</div>
+    </div>
+  `).join('');
+  
+  dotsContainer.innerHTML = banners.map((_, i) => `
+    <button class="dot ${i === 0 ? 'active' : ''}" onclick="goToBanner(${i})"></button>
+  `).join('');
+  
+  bannerIndex = 0;
+  updateBannerSlider();
+  startBannerAutoSlide();
+}
+
+function updateBannerSlider(){
+  const container = document.getElementById('bannerSlides');
+  if(!container) return;
+  const totalSlides = container.children.length;
+  if(totalSlides === 0) return;
+  container.style.transform = `translateX(-${bannerIndex * 100}%)`;
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === bannerIndex));
+}
+
+function goToBanner(index){
+  const container = document.getElementById('bannerSlides');
+  if(!container) return;
+  const totalSlides = container.children.length;
+  if(index < 0) index = totalSlides - 1;
+  if(index >= totalSlides) index = 0;
+  bannerIndex = index;
+  updateBannerSlider();
+  resetBannerAutoSlide();
+}
+
+function startBannerAutoSlide(){
+  if(bannerInterval) clearInterval(bannerInterval);
+  bannerInterval = setInterval(() => {
+    const container = document.getElementById('bannerSlides');
+    if(!container) return;
+    const totalSlides = container.children.length;
+    if(totalSlides <= 1) return;
+    bannerIndex = (bannerIndex + 1) % totalSlides;
+    updateBannerSlider();
+  }, 4000);
+}
+
+function resetBannerAutoSlide(){
+  if(bannerInterval) clearInterval(bannerInterval);
+  startBannerAutoSlide();
 }
 
 // ===== RENDER DYNAMIC DEALS =====
 function renderLiveDeals(){
-  const container=document.getElementById('dealsContainer');
+  const container = document.getElementById('dealsContainer');
   if(!container)return;
   if(liveDeals && liveDeals.length>0){
     container.innerHTML=liveDeals.filter(d=>d.is_active!==false).map(d=>`
@@ -337,7 +485,6 @@ function renderLiveDeals(){
       </div>
     `).join('');
   } else {
-    // Default deals
     container.innerHTML=`
       <div class="deal"><strong>Up to 50%</strong><small>Beauty & Cosmetics</small><button class="link" onclick="navigate('category',{cat:'Beauty & Cosmetics'})">Shop now →</button></div>
       <div class="deal"><strong>Daily Deals</strong><small>Grocery essentials</small><button class="link" onclick="navigate('category',{cat:'Grocery'})">Shop now →</button></div>
@@ -347,7 +494,7 @@ function renderLiveDeals(){
   }
 }
 
-// ===== RENDER DYNAMIC CATEGORIES (with images) =====
+// ===== RENDER DYNAMIC CATEGORIES =====
 function renderLiveCategories(){
   const el=document.getElementById('categories');
   if(!el)return;
@@ -360,7 +507,6 @@ function renderLiveCategories(){
       </button>
     `).join('');
   } else {
-    // Fallback to static categories
     el.innerHTML=categoriesStatic.slice(0,8).map(c=>`
       <button class="cat" onclick="filterProducts('${esc(c[1])}')">
         <span class="emoji">${c[0]}</span>
@@ -368,61 +514,57 @@ function renderLiveCategories(){
       </button>
     `).join('');
   }
-  // Nav categories
-  const nav=document.getElementById('catNav');
-  if(nav){
-    const catNames=liveCategories.length>0?liveCategories.map(c=>[c.icon||c.emoji||'📦',c.name]):categoriesStatic;
-    nav.innerHTML='<button class="active" onclick="resetProducts()">Home</button>'+catNames.map(c=>`<button onclick="filterProducts('${esc(c[1])}')">${c[0]} ${esc(c[1])}</button>`).join('');
+}
+
+// ===== RENDER FOOTER SOCIAL LINKS =====
+function renderFooterSocial(){
+  const container = document.getElementById('footerSocial');
+  if(!container) return;
+  const s = liveSupport || {};
+  let html = '';
+  if(s.facebook_url) html += `<a href="${esc(s.facebook_url)}" target="_blank">📘 Facebook</a>`;
+  if(s.instagram_url) html += `<a href="${esc(s.instagram_url)}" target="_blank">📸 Instagram</a>`;
+  if(s.whatsapp_number) html += `<a href="https://wa.me/${esc(s.whatsapp_number.replace(/[^0-9]/g,''))}" target="_blank">💬 WhatsApp</a>`;
+  if(s.youtube_url) html += `<a href="${esc(s.youtube_url)}" target="_blank">▶️ YouTube</a>`;
+  if(s.support_email) html += `<a href="mailto:${esc(s.support_email)}">📧 Email</a>`;
+  if(s.support_phone) html += `<a href="tel:${esc(s.support_phone.replace(/[^0-9+]/g,''))}">📞 Call</a>`;
+  container.innerHTML = html;
+}
+
+// ===== PROFILE PICTURE =====
+function updateProfilePic(){
+  const container = document.getElementById('profilePic');
+  if(!container) return;
+  if(userProfilePic){
+    container.innerHTML = `<img src="${esc(userProfilePic)}" alt="Profile">`;
+  } else {
+    container.innerHTML = `<span class="default-icon">👤</span>`;
   }
 }
 
-// ===== RENDER DYNAMIC SUPPORT / FOOTER =====
-function renderLiveSupport(){
-  const footer=document.getElementById('siteFooter');
-  if(!footer)return;
-  const s=liveSupport||{};
-  // Add social links to footer
-  let socialHtml='';
-  if(s.facebook_url) socialHtml+=`<a href="${esc(s.facebook_url)}" target="_blank">📘 Facebook</a>`;
-  if(s.instagram_url) socialHtml+=`<a href="${esc(s.instagram_url)}" target="_blank">📸 Instagram</a>`;
-  if(s.whatsapp_number) socialHtml+=`<a href="https://wa.me/${esc(s.whatsapp_number.replace(/[^0-9]/g,''))}" target="_blank">💬 WhatsApp</a>`;
-  if(s.youtube_url) socialHtml+=`<a href="${esc(s.youtube_url)}" target="_blank">▶️ YouTube</a>`;
-  if(s.support_email) socialHtml+=`<a href="mailto:${esc(s.support_email)}">📧 Email</a>`;
-  if(s.support_phone) socialHtml+=`<a href="tel:${esc(s.support_phone.replace(/[^0-9+]/g,''))}">📞 Call</a>`;
-  
-  const footerInner=footer.querySelector('.footer-inner');
-  if(footerInner){
-    const supportDiv=footerInner.querySelector('div:last-child');
-    if(supportDiv){
-      let html='<h4>Support</h4>';
-      html+=`<a onclick="openSupport()">🆘 Help & Support</a>`;
-      html+=`<a onclick="openChat()">💬 Chat with Seller</a>`;
-      if(socialHtml) html+=`<div style="margin-top:8px">${socialHtml}</div>`;
-      supportDiv.innerHTML=html;
-    }
-  }
-}
-
-// ===== LOAD LIVE CATALOG (All Dynamic Data) =====
+// ===== LOAD LIVE CATALOG =====
 async function loadLiveCatalog(){
   try{
-    const [{data:cats,error:catErr},{data:ps,error:pErr},{data:bs,error:bErr},{data:deals,error:dealErr},{data:support,error:supErr}]=await Promise.all([
+    const [{data:cats,error:catErr},{data:ps,error:pErr},{data:bs,error:bErr},{data:deals,error:dealErr},{data:support,error:supErr},{data:profile,error:profErr}]=await Promise.all([
       sb.from('categories').select('*').eq('is_active',true).order('sort_order',{ascending:true}),
       sb.from('products').select('*,categories(name)').eq('status','Active').order('created_at',{ascending:false}),
       sb.from('banner_ads').select('*').eq('is_active',true).order('sort_order',{ascending:true}),
       sb.from('deals').select('*').eq('is_active',true).order('sort_order',{ascending:true}),
-      sb.from('support_settings').select('*').maybeSingle()
+      sb.from('support_settings').select('*').maybeSingle(),
+      sb.from('profiles').select('avatar_url').eq('id', shoppingSession?.user?.id || '').maybeSingle()
     ]);
     if(catErr) console.warn('Categories:',catErr.message);
-    if(pErr) throw pErr;
+    if(pErr) console.warn('Products:',pErr.message);
     if(bErr) console.warn('Banners:',bErr.message);
     if(dealErr) console.warn('Deals:',dealErr.message);
     if(supErr) console.warn('Support:',supErr.message);
+    if(profErr) console.warn('Profile:',profErr.message);
     
     liveCategories=(cats||[]).map(c=>({id:c.id,name:c.name,icon:c.icon||c.emoji||'📦',image_url:c.image_url||'',is_active:c.is_active}));
     liveBanners=bs||[];
     liveDeals=deals||[];
     liveSupport=support||{};
+    userProfilePic=profile?.avatar_url||'';
     
     const shopIds=[...new Set((ps||[]).map(p=>p.shop_id).filter(Boolean))];
     let shopMap={};
@@ -457,8 +599,9 @@ async function loadLiveCatalog(){
 function renderLiveCatalogUI(){
   renderLiveCategories();
   renderLiveDeals();
-  renderLiveBanners();
-  renderLiveSupport();
+  renderBannerSlider();
+  renderFooterSocial();
+  updateProfilePic();
   renderHomeProducts();
   updateBadges();
 }
@@ -478,7 +621,7 @@ function resetProducts(){currentProducts=[...products];currentCategory='All';doc
 function filterProducts(cat){currentCategory=cat;currentProducts=products.filter(p=>p.cat===cat || (cat==='Deals'&&Number(p.old)>Number(p.price)));document.getElementById('productTitle').textContent=cat==='Deals'?'Deals & Offers':cat;renderProducts();document.getElementById('products')?.scrollIntoView({behavior:'smooth'})}
 function searchProducts(){const q=(document.getElementById('search')?.value||'').trim().toLowerCase();currentProducts=products.filter(p=>(p.name+' '+p.shop+' '+p.cat).toLowerCase().includes(q));document.getElementById('productTitle').textContent=q?'Search Results':'Popular Products';renderProducts()}
 
-// ===== CHAT WITH SELLER - SAVE TO SUPABASE =====
+// ===== CHAT WITH SELLER =====
 async function sendChatToSeller(shop, message){
   if(!shoppingSession?.user){
     toast('Please login first to chat',true);
@@ -502,25 +645,19 @@ async function sendChatToSeller(shop, message){
   }
 }
 
-// Override sendChat function
 function sendChat(){
   const input=document.getElementById('chatInput');
   if(!input||!input.value.trim())return;
   const msg=input.value.trim();
   const box=document.getElementById('chatBox');
   const shopName=document.querySelector('.modal-head h3')?.textContent?.replace('Chat — ','')||'Seller';
-  
-  // Show message locally
   box.innerHTML+=`<div style="background:#0e5b3e;color:#fff;padding:9px;border-radius:10px;margin:7px 0 7px auto;max-width:85%">${esc(msg)}</div>`;
   input.value='';
   box.scrollTop=box.scrollHeight;
-  
-  // Save to Supabase
   sendChatToSeller(shopName, msg);
   toast('Message sent ✓');
 }
 
-// Override openSellerChat
 function openSellerChat(shop){
   modal(`Chat — ${shop}`,`
     <div id="chatBox" style="height:240px;overflow:auto;background:#f5f8f6;border-radius:14px;padding:12px">
