@@ -19,7 +19,6 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
 .splash h1{margin:18px 0 5px;font-size:34px;letter-spacing:1px}.splash p{margin:0;color:#e8e5d8}.loader{width:90px;height:4px;background:rgba(255,255,255,.25);margin:25px auto 0;border-radius:10px;overflow:hidden}.loader i{display:block;height:100%;width:45%;background:var(--gold);animation:load 1.6s infinite}
 @keyframes load{to{transform:translateX(210%)}}@keyframes splashAutoHide{to{opacity:0;visibility:hidden;pointer-events:none}}@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
 
-/* ===== TOP BAR ===== */
 .top{position:sticky;top:0;z-index:100;background:var(--green);color:white}
 .topbar{max-width:1200px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .brand{font-weight:900;font-size:20px;white-space:nowrap;cursor:pointer}
@@ -58,12 +57,10 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
 
 .gold-btn{background:var(--gold);color:#183526;padding:10px 18px;border-radius:12px;font-weight:800;border:0;cursor:pointer}
 .outline-btn{background:#fff;border:1px solid var(--line);color:var(--green);padding:10px 14px;border-radius:11px;font-weight:700;cursor:pointer}
-
 .section{margin-top:24px}
 .section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .section h3{margin:0;font-size:20px}
 .link{background:none;color:var(--green);font-weight:700;border:0;cursor:pointer}
-
 .cats{display:grid;grid-template-columns:repeat(8,1fr);gap:10px}
 .cat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 7px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.03);cursor:pointer;transition:.2s;border:0}
 .cat:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
@@ -74,14 +71,12 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
 @media(max-width:620px){.cats{grid-template-columns:repeat(4,1fr);gap:7px}
 .cat{padding:10px 4px}
 .cat .emoji{font-size:22px}}
-
 .deals{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .deal{background:#fff;border-radius:16px;padding:16px;border:1px solid var(--line);position:relative}
 .deal strong{color:var(--danger);font-size:22px;display:block}
 .deal small{display:block;color:var(--muted);margin-top:4px}
 @media(max-width:900px){.deals{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.deals{gap:8px}}
-
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .product{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;position:relative;box-shadow:0 3px 12px rgba(0,0,0,.03)}
 .pic{height:180px;background:linear-gradient(135deg,#eef6f1,#f9f1d7);display:grid;place-items:center;font-size:72px;position:relative;overflow:hidden}
@@ -100,12 +95,10 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
 .pic{height:145px;font-size:55px}
 .pbody{padding:10px}
 .pbody h4{font-size:13px}}
-
 .banner{background:var(--cream);border-radius:20px;padding:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .banner h3{margin:0 0 5px}
 .banner p{margin:0;color:var(--muted)}
 
-/* ===== FOOTER ===== */
 footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
 .footer-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:25px}
 .footer-inner h4{margin-top:0;color:#fff}
@@ -116,7 +109,6 @@ footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
 .footer-social a:hover{background:rgba(255,255,255,.15);color:var(--gold)}
 .copy{text-align:center;border-top:1px solid #ffffff22;margin-top:25px;padding-top:18px;font-size:12px;color:#a9c0b5}
 @media(max-width:620px){.footer-inner{grid-template-columns:1fr 1fr}}
-
 .modal-back{position:fixed;inset:0;background:#0008;z-index:500;display:flex;align-items:flex-end;justify-content:center;padding:10px}
 .modal{background:#fff;width:min(680px,100%);max-height:92vh;overflow:auto;border-radius:24px 24px 12px 12px;padding:20px;box-shadow:0 20px 70px #0005}
 .modal-head{display:flex;justify-content:space-between;align-items:center}
@@ -126,7 +118,6 @@ footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
 .form label{font-size:12px;font-weight:700}
 .row{display:flex;gap:10px}
 .row>*{flex:1}
-
 .cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}
 .cart-pic{width:58px;height:58px;border-radius:12px;background:var(--cream);display:grid;place-items:center;font-size:28px}
 .cart-info{flex:1}
@@ -137,11 +128,9 @@ footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
 .summary .total{font-weight:900;font-size:19px;border-top:1px solid var(--line);padding-top:10px}
 .shop-group{border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
 .shop-title{font-weight:900;color:var(--green);margin-bottom:5px}
-
 .toast{position:fixed;right:18px;bottom:18px;background:#123e2e;color:#fff;padding:13px 16px;border-radius:13px;box-shadow:var(--shadow);z-index:900;max-width:320px;animation:slide .25s ease}
 .toast.error{background:#a73737}
 @keyframes slide{from{transform:translateY(15px);opacity:0}to{transform:none;opacity:1}}
-
 .chat{position:fixed;right:18px;bottom:18px;z-index:200}
 .chat-fab{width:58px;height:58px;border-radius:50%;background:var(--gold);color:#123e2e;font-size:24px;box-shadow:0 8px 25px #0003;border:0;cursor:pointer}
 .chatbox{position:absolute;right:0;bottom:70px;width:330px;background:#fff;border-radius:18px;box-shadow:0 15px 50px #0003;border:1px solid var(--line);overflow:hidden}
@@ -153,28 +142,23 @@ footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
 .chat-send{display:flex;padding:8px;gap:7px}
 .chat-send input{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px}
 .chat-send button{padding:8px 12px;border-radius:10px;background:var(--gold);color:#173126;font-weight:800;border:0;cursor:pointer}
-
 .tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);overflow:auto;margin-bottom:15px}
 .tabs button{padding:10px 13px;background:none;white-space:nowrap;border:0;cursor:pointer}
 .tabs button.active{color:var(--green);font-weight:800;border-bottom:2px solid var(--gold)}
 .order{border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:10px}
 .order-top{display:flex;justify-content:space-between}
 .status{font-size:11px;background:#e7f4ed;color:var(--green);padding:5px 8px;border-radius:10px;font-weight:800}
-
-/* ===== NAV / BOTTOM ===== */
 .app-screen{min-height:55vh}
 .page-screen{max-width:1200px;margin:auto;padding:16px 18px 90px}
 .page-head{display:flex;align-items:center;gap:10px;margin-bottom:15px}
 .back-btn{background:#fff;border:1px solid var(--line);color:var(--green);border-radius:11px;padding:10px 14px;font-weight:800;cursor:pointer}
 .page-head h2{margin:0;font-size:22px}
-
 .bottom-nav{position:fixed;left:0;right:0;bottom:0;height:65px;background:#fff;border-top:1px solid var(--line);z-index:180;display:flex;justify-content:center;box-shadow:0 -5px 18px #0000000d}
 .bottom-nav-inner{width:min(620px,100%);display:grid;grid-template-columns:repeat(5,1fr)}
 .bottom-nav button{background:#fff;color:#718078;font-size:10px;font-weight:700;padding:6px 2px;position:relative;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
 .bottom-nav button .bi{font-size:20px;line-height:1.2}
 .bottom-nav button.active{color:var(--green)}
 .bottom-nav button.active:after{content:"";position:absolute;left:25%;right:25%;bottom:4px;height:3px;background:var(--gold);border-radius:4px}
-
 .drawer-back{position:fixed;inset:0;background:#0007;z-index:600;display:none}
 .drawer{position:absolute;left:0;top:0;bottom:0;width:min(330px,88vw);background:#fff;box-shadow:15px 0 40px #0004;padding:18px;overflow:auto}
 .drawer-brand{background:linear-gradient(135deg,#0e5b3e,#16704e);color:#fff;border-radius:18px;padding:18px;margin-bottom:15px}
@@ -182,7 +166,6 @@ footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
 .drawer-brand span{color:var(--gold)}
 .drawer a{display:flex;align-items:center;gap:12px;padding:13px;border-radius:11px;color:var(--text);font-weight:700;text-decoration:none;cursor:pointer;margin:3px 0}
 .drawer a:hover{background:var(--cream);color:var(--green)}
-
 .auth-screen{position:fixed;inset:0;z-index:99999;background:linear-gradient(145deg,#075b3d,#0c6b49);display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}
 .auth-card{width:min(430px,100%);background:#fff;border-radius:25px;padding:24px;box-shadow:0 20px 70px #0005;max-height:92vh;overflow:auto}
 .auth-logo{width:70px;height:70px;border-radius:20px;background:var(--green);display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:45px;margin:0 auto 12px}
@@ -191,7 +174,6 @@ footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
 .auth-tabs{display:flex;background:#f1f5f3;border-radius:12px;padding:4px;margin:16px 0}
 .auth-tabs button{flex:1;padding:10px;border-radius:9px;background:transparent;color:var(--muted);font-weight:800;border:0;cursor:pointer}
 .auth-tabs button.active{background:#fff;color:var(--green);box-shadow:0 2px 8px #0000000d}
-
 .search-results-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .result-category{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .result-category .emoji{font-size:28px}
@@ -200,35 +182,28 @@ footer{margin-top:40px;background:#103d2d;color:#dcebe4;padding:35px 18px}
 .sortbar{display:flex;gap:8px;overflow:auto;margin-bottom:14px}
 .sortbar button{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;white-space:nowrap;cursor:pointer}
 .sortbar button.active{background:var(--green);color:#fff;border-color:var(--green)}
-
 html,body{max-width:100%;overflow-x:hidden}
 .modal{max-width:calc(100vw - 24px);box-sizing:border-box}
 .modal-back{padding:12px;box-sizing:border-box}
 .modal .pic{max-width:100%;overflow:hidden}
-@media(max-width:700px){
-  .page-screen{overflow-x:hidden}
-  .page-screen .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .page-screen .row{flex-wrap:wrap}
-  .page-screen .row>*{flex:1 1 145px}
-  .modal .row{flex-wrap:wrap}
-  .modal .row>*{flex:1 1 140px}
-}
-@media(max-width:430px){
-  .page-screen .grid{grid-template-columns:1fr 1fr}
-  .bottom-nav button{font-size:10px}
-}
+@media(max-width:700px){.page-screen{overflow-x:hidden}
+.page-screen .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.page-screen .row{flex-wrap:wrap}
+.page-screen .row>*{flex:1 1 145px}
+.modal .row{flex-wrap:wrap}
+.modal .row>*{flex:1 1 140px}}
+@media(max-width:430px){.page-screen .grid{grid-template-columns:1fr 1fr}
+.bottom-nav button{font-size:10px}}
 .product-detail{min-width:0;overflow:hidden}
 .product-detail>*{min-width:0}
 .product-detail .pic{width:100%;box-sizing:border-box}
-@media(max-width:700px){
-  #pageRoot{max-width:100vw;overflow-x:hidden}
-  #pageRoot .product-detail{display:block!important;width:100%;box-sizing:border-box;padding:12px!important}
-  #pageRoot .product-detail .pic{height:210px!important;font-size:70px!important;margin-bottom:14px}
-  #pageRoot .product-detail h1{font-size:24px!important;line-height:1.2!important;word-break:break-word}
-  #pageRoot .product-detail .price{font-size:25px!important}
-  #pageRoot .product-detail .row{display:flex;gap:8px;flex-wrap:wrap}
-  #pageRoot .product-detail .row>*{min-width:0;flex:1 1 140px}
-}
+@media(max-width:700px){#pageRoot{max-width:100vw;overflow-x:hidden}
+#pageRoot .product-detail{display:block!important;width:100%;box-sizing:border-box;padding:12px!important}
+#pageRoot .product-detail .pic{height:210px!important;font-size:70px!important;margin-bottom:14px}
+#pageRoot .product-detail h1{font-size:24px!important;line-height:1.2!important;word-break:break-word}
+#pageRoot .product-detail .price{font-size:25px!important}
+#pageRoot .product-detail .row{display:flex;gap:8px;flex-wrap:wrap}
+#pageRoot .product-detail .row>*{min-width:0;flex:1 1 140px}}
 .order-detail-box{width:100%;box-sizing:border-box}
 .order-detail-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
 .customer-box{background:#f6f9f7;border:1px solid var(--line);border-radius:14px;padding:13px;margin-top:10px}
@@ -249,7 +224,6 @@ html,body{max-width:100%;overflow-x:hidden}
   </div>
 </div>
 
-<!-- ===== TOP BAR ===== -->
 <header class="top">
   <div class="topbar">
     <button class="menu-trigger" onclick="openDrawer()" aria-label="Menu">☰</button>
@@ -258,20 +232,15 @@ html,body{max-width:100%;overflow-x:hidden}
     <div class="top-actions">
       <button class="icon-btn" onclick="openWishlist()" aria-label="Wishlist">♡<span id="wishBadge" class="badge">0</span></button>
       <button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span id="cartBadge" class="badge">0</span></button>
-      <div class="profile-pic" id="profilePic" onclick="openAccount()">
-        <span class="default-icon">👤</span>
-      </div>
+      <div class="profile-pic" id="profilePic" onclick="openAccount()"><span class="default-icon">👤</span></div>
     </div>
   </div>
 </header>
 
-<!-- ===== MAIN CONTENT ===== -->
 <main id="homeScreen" class="app-screen">
   <!-- BANNER SLIDER -->
   <div class="banner-slider" id="bannerSlider">
-    <div class="slides" id="bannerSlides">
-      <!-- Slides rendered by JS -->
-    </div>
+    <div class="slides" id="bannerSlides"></div>
     <div class="dots" id="bannerDots"></div>
   </div>
 
@@ -294,7 +263,6 @@ html,body{max-width:100%;overflow-x:hidden}
 
 <div id="pageRoot" class="hidden"></div>
 
-<!-- ===== DRAWER ===== -->
 <div id="drawerRoot" class="drawer-back" onclick="if(event.target===this)closeDrawer()">
   <div class="drawer" onclick="event.stopPropagation()">
     <div class="drawer-brand"><b>SUKKUR <span>BAZAR</span></b><div style="font-size:12px;margin-top:5px">Har Zaroorat, Ab Aapke Shehar Mein</div></div>
@@ -312,7 +280,6 @@ html,body{max-width:100%;overflow-x:hidden}
   </div>
 </div>
 
-<!-- ===== BOTTOM NAV ===== -->
 <nav class="bottom-nav">
   <div class="bottom-nav-inner">
     <button data-nav="home" onclick="navigate('home')"><span class="bi">⌂</span>Home</button>
@@ -325,7 +292,6 @@ html,body{max-width:100%;overflow-x:hidden}
 
 <div id="authRoot" class="hidden"></div>
 
-<!-- ===== FOOTER ===== -->
 <footer id="siteFooter">
   <div class="footer-inner">
     <div><h4>SUKKUR BAZAR</h4><p>Har Zaroorat, Ab Aapke Shehar Mein.</p><p style="font-size:12px;color:#abc0b7">A local multi-shop marketplace made for Sukkur.</p></div>
@@ -351,9 +317,6 @@ html,body{max-width:100%;overflow-x:hidden}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ============================================================
-//  CONFIG
-// ============================================================
 const KEY='sukkur_bazar_shop_v2';
 const categoriesStatic=[
  ['🛒','Grocery'],['💄','Beauty & Cosmetics'],['💊','Medicine & Health'],['👕','Fashion'],
@@ -381,9 +344,6 @@ let products=[
 ];
 let state=JSON.parse(localStorage.getItem(KEY)||'null')||{cart:[],wishlist:[],orders:[],user:null,addresses:[],chats:[]};
 
-// ============================================================
-//  SUPABASE
-// ============================================================
 const SUPABASE_URL='https://xltyakylnntzlxhcggil.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_obLweb6F_j_8Q_tpTjWZpQ_PJG3Tt1I';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
@@ -393,6 +353,8 @@ let liveBanners=[];
 let liveDeals=[];
 let liveSupport={};
 let userProfilePic='';
+let bannerInterval=null;
+let bannerIndex=0;
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function money(n){return 'Rs. '+Number(n).toLocaleString('en-PK')}
@@ -421,12 +383,9 @@ function liveProductCard(p){
 }
 
 // ===== BANNER SLIDER =====
-let bannerIndex = 0;
-let bannerInterval = null;
-
 function renderBannerSlider(){
-  const container = document.getElementById('bannerSlides');
-  const dotsContainer = document.getElementById('bannerDots');
+  const container=document.getElementById('bannerSlides');
+  const dotsContainer=document.getElementById('bannerDots');
   if(!container || !dotsContainer) return;
   
   const banners = liveBanners.length > 0 ? liveBanners : [{title:'Sukkur Bazar', description:'Har Zaroorat, Ab Aapke Shehar Mein', image_url:'', link_url:''}];
@@ -452,7 +411,7 @@ function renderBannerSlider(){
 }
 
 function updateBannerSlider(){
-  const container = document.getElementById('bannerSlides');
+  const container=document.getElementById('bannerSlides');
   if(!container) return;
   const totalSlides = container.children.length;
   if(totalSlides === 0) return;
@@ -461,7 +420,7 @@ function updateBannerSlider(){
 }
 
 function goToBanner(index){
-  const container = document.getElementById('bannerSlides');
+  const container=document.getElementById('bannerSlides');
   if(!container) return;
   const totalSlides = container.children.length;
   if(index < 0) index = totalSlides - 1;
@@ -474,7 +433,7 @@ function goToBanner(index){
 function startBannerAutoSlide(){
   if(bannerInterval) clearInterval(bannerInterval);
   bannerInterval = setInterval(() => {
-    const container = document.getElementById('bannerSlides');
+    const container=document.getElementById('bannerSlides');
     if(!container) return;
     const totalSlides = container.children.length;
     if(totalSlides <= 1) return;
@@ -515,11 +474,7 @@ function renderLiveDeals(){
   if(!container)return;
   if(liveDeals && liveDeals.length>0){
     container.innerHTML=liveDeals.filter(d=>d.is_active!==false).map(d=>`
-      <div class="deal">
-        <strong>${esc(d.title||'Deal')}</strong>
-        <small>${esc(d.subtitle||'')}</small>
-        <button class="link" onclick="navigate('category',{cat:'${esc(d.category||'')}'})">Shop now →</button>
-      </div>
+      <div class="deal"><strong>${esc(d.title||'Deal')}</strong><small>${esc(d.subtitle||'')}</small><button class="link" onclick="navigate('category',{cat:'${esc(d.category||'')}'})">Shop now →</button></div>
     `).join('');
   } else {
     container.innerHTML=`
@@ -625,7 +580,7 @@ async function loadLiveCatalog(){
 }
 
 // ============================================================
-//  CART FUNCTIONS
+//  CART
 // ============================================================
 function addCart(id){
   const p=findProduct(id);
@@ -634,15 +589,12 @@ function addCart(id){
   const item=state.cart.find(x=>String(x.id)===String(id));
   if(item) item.qty=(item.qty||0)+1;
   else state.cart.push({id:String(id),qty:1});
-  save();
-  updateBadges();
-  toast('Added to cart ✓');
+  save(); updateBadges(); toast('Added to cart ✓');
 }
 
 function removeCart(id){
   state.cart=state.cart.filter(x=>String(x.id)!==String(id));
-  save();
-  openCart();
+  save(); openCart();
 }
 
 function changeQty(id,d){
@@ -650,17 +602,14 @@ function changeQty(id,d){
   if(!item) return;
   item.qty=Math.max(0,(item.qty||0)+d);
   if(item.qty===0) state.cart=state.cart.filter(x=>String(x.id)!==String(id));
-  save();
-  openCart();
+  save(); openCart();
 }
 
 function toggleWish(id){
   const idx=state.wishlist.indexOf(String(id));
   if(idx>=0) state.wishlist.splice(idx,1);
   else state.wishlist.push(String(id));
-  save();
-  renderHomeProducts();
-  toast(idx>=0?'Removed from wishlist':'Added to wishlist ♥');
+  save(); renderHomeProducts(); toast(idx>=0?'Removed from wishlist':'Added to wishlist ♥');
 }
 
 function openCart(){
@@ -693,28 +642,23 @@ function openCart(){
 let pageHistory=[{name:'home',data:{}}];
 let activePage='home';
 let currentProducts=[...products];
-let currentCategory='All';
 
 function setBottomActive(name){
   document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.toggle('active',b.dataset.nav===name));
 }
-
 function pageHead(title){
   return `<div class="page-head"><button class="back-btn" onclick="goBack()">← Back</button><h2>${esc(title)}</h2></div>`;
 }
-
 function showHome(){
   document.getElementById('homeScreen').classList.remove('hidden');
   document.getElementById('pageRoot').classList.add('hidden');
   activePage='home';setBottomActive('home');renderHomeProducts();window.scrollTo(0,0);
 }
-
 function showPage(content,name){
   document.getElementById('homeScreen').classList.add('hidden');
   const root=document.getElementById('pageRoot');root.classList.remove('hidden');root.innerHTML=content;
   activePage=name;setBottomActive(name);window.scrollTo(0,0);
 }
-
 function navigate(name,data={}){
   if(name==='cart'){openCart();return}
   if(name==='account'){openAccount();return}
@@ -728,7 +672,6 @@ function navigate(name,data={}){
   else if(name==='search')showSearchPage(data.query||'');
   else if(name==='orders')showOrdersPage();
 }
-
 function goBack(){
   if(document.getElementById('modalRoot').innerHTML){closeModal();return}
   if(pageHistory.length>1){
@@ -742,7 +685,6 @@ function goBack(){
     else if(prev.name==='orders')showOrdersPage(false);
   }else showHome();
 }
-
 function showCategoriesPage(push=true){
   if(push && activePage!=='categories')pageHistory.push({name:'categories',data:{}});
   const catNames=liveCategories.length>0?liveCategories.map(c=>({icon:c.icon||c.emoji||'📦',name:c.name,image:c.image_url})):categoriesStatic.map(c=>({icon:c[0],name:c[1]}));
@@ -755,21 +697,11 @@ function showCategoriesPage(push=true){
   `).join('');
   showPage(pageHead('All Categories')+`<div class="cats" style="grid-template-columns:repeat(4,1fr)">${cards}</div>`,'categories');
 }
-
 function showCategoryPage(cat,push=true){
   if(push && activePage!=='category')pageHistory.push({name:'category',data:{cat}});
   const ps=products.filter(p=>p.cat===cat);
-  const sortbarHtml=`
-    <div class="sortbar">
-      <button class="active" onclick="sortCategory('popular','${esc(cat)}')">Popular</button>
-      <button onclick="sortCategory('low','${esc(cat)}')">Price Low</button>
-      <button onclick="sortCategory('high','${esc(cat)}')">Price High</button>
-      <button onclick="sortCategory('rating','${esc(cat)}')">Top Rated</button>
-    </div>
-  `;
-  showPage(pageHead(cat)+sortbarHtml+`<div style="margin-bottom:12px;color:var(--muted);font-size:13px">${ps.length} products</div><div class="grid" id="pageProductGrid">${ps.map(liveProductCard).join('')}</div>`,'category');
+  showPage(pageHead(cat)+`<div class="sortbar"><button class="active" onclick="sortCategory('popular','${esc(cat)}')">Popular</button><button onclick="sortCategory('low','${esc(cat)}')">Price Low</button><button onclick="sortCategory('high','${esc(cat)}')">Price High</button><button onclick="sortCategory('rating','${esc(cat)}')">Top Rated</button></div><div style="margin-bottom:12px;color:var(--muted);font-size:13px">${ps.length} products</div><div class="grid" id="pageProductGrid">${ps.map(liveProductCard).join('')}</div>`,'category');
 }
-
 function sortCategory(mode,cat){
   let ps=products.filter(p=>p.cat===cat);
   if(mode==='low')ps.sort((a,b)=>a.price-b.price);
@@ -778,7 +710,6 @@ function sortCategory(mode,cat){
   if(mode==='popular')ps.sort((a,b)=>b.sold-a.sold);
   const g=document.getElementById('pageProductGrid');if(g)g.innerHTML=ps.map(liveProductCard).join('');
 }
-
 function showProductPage(id,push=true){
   if(push && activePage!=='product')pageHistory.push({name:'product',data:{id}});
   const p=products.find(x=>x.id===id);if(!p)return;
@@ -786,20 +717,15 @@ function showProductPage(id,push=true){
   showPage(pageHead('Product Details')+`
     <div class="product-detail" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;background:#fff;padding:18px;border-radius:20px;border:1px solid var(--line)">
       <div class="pic" style="height:330px;border-radius:17px;overflow:hidden">${img?`<img src="${esc(img)}" style="width:100%;height:100%;object-fit:cover">`:p.emoji}</div>
-      <div>
-        <div class="shop">${esc(p.shop)}</div>
-        <h1 style="margin:8px 0;font-size:27px">${esc(p.name)}</h1>
-        <div class="stars">★ ${p.rating} • 128 Reviews</div>
-        <div class="price" style="font-size:29px">${money(p.price)} ${Number(p.old||0)>p.price?`<span class="old">${money(p.old)}</span>`:''}</div>
-        <p style="color:var(--muted);line-height:1.6">${esc(p.description||'Premium quality product from a trusted local Sukkur seller.')}</p>
-        <p><b>Stock:</b> ${p.stock} available</p>
-        <div class="row"><button class="add" onclick="addCart(${p.id})">Add to Cart</button><button class="gold-btn" onclick="buyNow(${p.id})">Buy Now</button></div>
-        <button class="outline-btn" style="width:100%;margin-top:9px" onclick="openSellerChat('${esc(p.shop)}')">💬 Chat with Seller</button>
-      </div>
+      <div><div class="shop">${esc(p.shop)}</div><h1 style="margin:8px 0;font-size:27px">${esc(p.name)}</h1>
+      <div class="stars">★ ${p.rating} • 128 Reviews</div><div class="price" style="font-size:29px">${money(p.price)} ${Number(p.old||0)>p.price?`<span class="old">${money(p.old)}</span>`:''}</div>
+      <p style="color:var(--muted);line-height:1.6">${esc(p.description||'Premium quality product from a trusted local Sukkur seller.')}</p>
+      <p><b>Stock:</b> ${p.stock} available</p>
+      <div class="row"><button class="add" onclick="addCart(${p.id})">Add to Cart</button><button class="gold-btn" onclick="buyNow(${p.id})">Buy Now</button></div>
+      <button class="outline-btn" style="width:100%;margin-top:9px" onclick="openSellerChat('${esc(p.shop)}')">💬 Chat with Seller</button></div>
     </div>
   `,'product');
 }
-
 function showSearchPage(query,push=true){
   if(push && activePage!=='search')pageHistory.push({name:'search',data:{query}});
   const q=(query||'').trim().toLowerCase();
@@ -832,7 +758,6 @@ async function sendChatToSeller(shop, message){
     return true;
   }catch(e){console.error('Send chat error:',e);return false;}
 }
-
 function sendChat(){
   const input=document.getElementById('chatInput');
   if(!input||!input.value.trim())return;
@@ -845,7 +770,6 @@ function sendChat(){
   sendChatToSeller(shopName, msg);
   toast('Message sent ✓');
 }
-
 function openSellerChat(shop){
   modal(`Chat — ${shop}`,`
     <div id="chatBox" style="height:240px;overflow:auto;background:#f5f8f6;border-radius:14px;padding:12px">
@@ -868,7 +792,6 @@ async function ensureCustomerProfile(user){
   state.user={id:user.id,name,phone,email:user.email||''};
   save();
 }
-
 async function loadCustomerOrders(){
   if(!shoppingSession?.user)return;
   const {data,error}=await sb.from('orders').select('*,order_items(*)').eq('customer_id',shoppingSession.user.id).order('created_at',{ascending:false});
@@ -876,7 +799,6 @@ async function loadCustomerOrders(){
   state.orders=(data||[]).map(o=>({id:o.order_number||o.id,date:o.created_at?new Date(o.created_at).toLocaleString('en-PK'):'',customerName:o.customer_name||state.user?.name,customerPhone:o.customer_phone||state.user?.phone,shops:[{shop:'Sukkur Bazar',items:(o.order_items||[]).map(i=>({name:i.product_name,qty:Number(i.quantity||1),price:Number(i.price||0),id:i.product_id}))}],total:Number(o.total||0),payment:o.payment||'Cash on Delivery',delivery:o.delivery||'Sukkur Bazar Delivery',address:o.delivery_address||'',status:o.status||'New'}));
   save();
 }
-
 let authRedirectInProgress=false;
 async function gmailAuth(){
   if(authRedirectInProgress)return;
@@ -895,10 +817,8 @@ async function gmailAuth(){
     toast(e.message||'Google login failed',true);
   }
 }
-
 let authReady=false;
 let authListenerAttached=false;
-
 async function handleShoppingSession(session){
   shoppingSession=session||null;
   if(session?.user){
@@ -915,7 +835,6 @@ async function handleShoppingSession(session){
   }
   authReady=true;
 }
-
 async function initShoppingSupabase(){
   try{
     if(!authListenerAttached){
@@ -938,21 +857,18 @@ async function initShoppingSupabase(){
     await loadLiveCatalog();
   }catch(e){console.error(e)}
 }
-
 function openAuth(){
   const root=document.getElementById('authRoot');root.classList.remove('hidden');
   root.innerHTML=`<div class="auth-screen"><div class="auth-card"><div class="auth-logo">S</div><h2>SUKKUR BAZAR</h2><p>Har Zaroorat, Ab Aapke Shehar Mein</p>
   <div class="auth-tabs"><button id="loginTab" class="active" onclick="authMode('login')">Login</button><button id="signupTab" onclick="authMode('signup')">Sign Up</button></div><div id="authForm"></div></div></div>`;
   authMode('login');
 }
-
 function authMode(mode){
   document.getElementById('loginTab').classList.toggle('active',mode==='login');
   document.getElementById('signupTab').classList.toggle('active',mode==='signup');
   const signup=mode==='signup';
   document.getElementById('authForm').innerHTML=`<form class="form" onsubmit="submitAuth(event,'${mode}')">${signup?'<label>Name</label><input id="authName" required placeholder="Your name">':''}<label>Mobile Number</label><input id="authPhone" required placeholder="03xx-xxxxxxx"><label>Password</label><input id="authPass" type="password" required placeholder="Password">${signup?'<label>Confirm Password</label><input id="authPass2" type="password" required placeholder="Confirm password">':''}<button class="add" type="submit">${signup?'Create Account':'Login'}</button><button type="button" class="gold-btn" onclick="gmailAuth()">Continue with Gmail</button><small style="text-align:center;color:var(--muted)">Simple V1 account.</small></form>`;
 }
-
 function submitAuth(e,mode){
   e.preventDefault();
   const phone=document.getElementById('authPhone').value.trim();
@@ -961,7 +877,6 @@ function submitAuth(e,mode){
   state.user={name:mode==='signup'?document.getElementById('authName').value:'Customer',phone};
   save();document.getElementById('authRoot').classList.add('hidden');showHome();toast(mode==='signup'?'Account created ✓':'Welcome back ✓');
 }
-
 async function logoutCustomer(){
   closeModal();
   try{await sb.auth.signOut()}catch(e){console.warn('Sign out:',e)}
@@ -976,26 +891,20 @@ function openAccount(){
   if(!state.user){openAuth();return}
   modal('My Account',`<div class="banner"><div><h3>${esc(state.user.name||'Customer')}</h3><p>${esc(state.user.phone||'')}</p></div><div style="font-size:42px">👤</div></div><div class="section"><button class="outline-btn" style="width:100%;margin:5px 0" onclick="closeModal();navigate('orders')">📦 My Orders</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openAddress()">📍 Addresses</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openWishlist()">♥ Wishlist</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openSupport()">🆘 Help & Support</button><button class="outline-btn" style="width:100%;margin:5px 0" onclick="openSettings()">⚙️ Settings</button><button class="outline-btn" style="width:100%;margin:5px 0;color:#b33" onclick="logoutCustomer()">Logout</button></div>`);
 }
-
 function showOrdersPage(push=true){
   if(push&&activePage!=='orders')pageHistory.push({name:'orders',data:{}});
   let content='';
   if(state.orders.length){
     content=state.orders.map((o,i)=>{
       const itemCount=(o.shops||[]).reduce((n,sh)=>n+(sh.items||[]).reduce((m,x)=>m+(Number(x.qty)||0),0),0);
-      return `<div class="order">
-        <div class="order-top"><b>${esc(o.id)}</b><span class="status">${esc(o.status||'Confirmed')}</span></div>
+      return `<div class="order"><div class="order-top"><b>${esc(o.id)}</b><span class="status">${esc(o.status||'Confirmed')}</span></div>
         <small>${esc(o.date||'')}</small>
         <div style="margin-top:8px;color:var(--muted)">${itemCount} item${itemCount===1?'':'s'} • ${money(o.total||0)}</div>
-        <button class="add" style="width:100%;margin-top:10px" onclick="openOrderDetail(${i})">View Order Details</button>
-      </div>`;
+        <button class="add" style="width:100%;margin-top:10px" onclick="openOrderDetail(${i})">View Order Details</button></div>`;
     }).join('');
-  }else{
-    content='<div style="text-align:center;background:#fff;border-radius:18px;padding:45px;color:var(--muted)">No orders yet 📦</div>';
-  }
+  }else{content='<div style="text-align:center;background:#fff;border-radius:18px;padding:45px;color:var(--muted)">No orders yet 📦</div>';}
   showPage(pageHead('My Orders')+content,'orders');
 }
-
 function openOrderDetail(index){
   const o=state.orders[index];
   if(!o)return;
@@ -1006,17 +915,22 @@ function openOrderDetail(index){
     const shopTotal=(sh.items||[]).reduce((sum,i)=>sum+(Number(i.price)||0)*(Number(i.qty)||0),0);
     return `<div class="shop-group" style="margin-top:12px"><div class="shop-title">🏪 ${esc(sh.shop)} <span class="status">${esc(sh.status||'Pending')}</span></div>${items}<div style="text-align:right;margin-top:7px"><b>Shop Total: ${money(shopTotal)}</b></div></div>`;
   }).join('');
-  modal('Order Details',`<div class="order-detail-box"><div class="order-detail-title"><b>${esc(o.id)}</b><span class="status">${esc(o.status||'Confirmed')}</span></div><div class="customer-box"><h4 style="margin:0 0 10px">Customer Details</h4><div><b>Name</b><span>${esc(name)}</span></div><div><b>Mobile Number</b><span>${esc(phone)}</span></div><div><b>Complete Address</b><span>${esc(o.address||'Not available')}</span></div></div><div class="customer-box"><h4 style="margin:0 0 10px">Order & Delivery</h4><div><b>Date</b><span>${esc(o.date||'')}</span></div><div><b>Delivery</b><span>${esc(o.delivery||'')}</span></div><div><b>Payment</b><span>${esc(o.payment||'')}</span></div></div><h4 style="margin:16px 0 7px">Products by Shop</h4>${shopHtml}<div class="summary" style="margin-top:14px"><div class="total"><span>Total Order</span><b>${money(o.total||0)}</b></div></div></div>`);
+  modal('Order Details',`<div class="order-detail-box"><div class="order-detail-title"><b>${esc(o.id)}</b><span class="status">${esc(o.status||'Confirmed')}</span></div>
+    <div class="customer-box"><h4 style="margin:0 0 10px">Customer Details</h4>
+    <div><b>Name</b><span>${esc(name)}</span></div><div><b>Mobile Number</b><span>${esc(phone)}</span></div>
+    <div><b>Complete Address</b><span>${esc(o.address||'Not available')}</span></div></div>
+    <div class="customer-box"><h4 style="margin:0 0 10px">Order & Delivery</h4>
+    <div><b>Date</b><span>${esc(o.date||'')}</span></div><div><b>Delivery</b><span>${esc(o.delivery||'')}</span></div>
+    <div><b>Payment</b><span>${esc(o.payment||'')}</span></div></div>
+    <h4 style="margin:16px 0 7px">Products by Shop</h4>${shopHtml}
+    <div class="summary" style="margin-top:14px"><div class="total"><span>Total Order</span><b>${money(o.total||0)}</b></div></div></div>`);
 }
-
 function openOrders(){if(!state.user){openAuth();return}closeModal();navigate('orders')}
-
 function openAddress(){
   const list=state.addresses||[];
   modal('Addresses',`${list.length?list.map((a,i)=>`<div class="order"><b>${esc(a.label||'Address '+(i+1))}</b><p style="margin:5px 0;color:var(--muted)">${esc(a.address)}</p><button class="outline-btn" onclick="state.addresses.splice(${i},1);save();openAddress()">Delete</button></div>`).join(''):'<p style="color:var(--muted)">No saved addresses.</p>'}
   <div class="form" style="margin-top:14px"><input id="newAddressLabel" placeholder="Label e.g. Home"><textarea id="newAddressText" placeholder="Complete delivery address"></textarea><button class="add" onclick="addAddress()">Save Address</button></div>`);
 }
-
 function addAddress(){
   const address=document.getElementById('newAddressText').value.trim();
   if(!address){toast('Enter delivery address',true);return}
@@ -1024,20 +938,16 @@ function addAddress(){
   state.addresses.push({label:document.getElementById('newAddressLabel').value.trim()||'Address',address});
   save();openAddress();toast('Address saved ✓');
 }
-
 function openWishlist(){
   const ps=products.filter(p=>state.wishlist.includes(p.id));
   modal('Wishlist',ps.length?`<div class="grid">${ps.map(liveProductCard).join('')}</div>`:'<div style="text-align:center;padding:35px;color:var(--muted)">Your wishlist is empty ♥</div>',true);
 }
-
 function openSupport(){
   modal('Help & Support',`<div class="form"><p style="color:var(--muted)">Need help with an order, payment or delivery?</p><select id="supportTopic"><option>Order Help</option><option>Payment Help</option><option>Delivery Help</option><option>Account Help</option></select><textarea id="supportMsg" placeholder="Write your message"></textarea><button class="add" onclick="sendSupport()">Send Message</button><button class="outline-btn" onclick="openSellerChat('Sukkur Bazar Support')">💬 Chat with Support</button></div>`);
 }
-
 function sendSupport(){toast('Support request sent ✓');closeModal()}
 function openChat(){openSellerChat('Seller')}
 function toggleChat(){openSellerChat('Seller')}
-
 function openSettings(){
   state.settings=state.settings||{notifications:true,language:'English',chatNotifications:true,orderUpdates:true};
   modal('Settings',`
@@ -1050,9 +960,7 @@ function openSettings(){
       <button class="outline-btn" onclick="toast('Sukkur Bazar Shopping App V1')">ℹ️ About</button>
     </div>`);
 }
-
 function updateSetting(key,value){state.settings=state.settings||{};state.settings[key]=value;save();toast('Setting updated ✓')}
-
 function applyLanguage(lang){
   document.documentElement.lang=lang==='Urdu'?'ur':'en';
   document.documentElement.dir=lang==='Urdu'?'rtl':'ltr';
@@ -1081,34 +989,17 @@ function openCheckout(){
   modal('Checkout',`
     <div class="form">
       <h4>Customer Details</h4>
-      <label>Full Name</label>
-      <input id="checkoutName" value="${esc(u.name&&u.name!=='Customer'?u.name:'')}" placeholder="Enter your full name" required>
-      <label>Mobile Number</label>
-      <input id="checkoutPhone" type="tel" value="${esc(u.phone&&u.phone!=='Gmail account'?u.phone:'')}" placeholder="03xx-xxxxxxx" required>
-      <label>Complete Delivery Address</label>
-      <textarea id="checkoutAddressText" placeholder="House / Street / Area, Sukkur" required></textarea>
-      <h4>Delivery Method</h4>
-      <select id="checkoutDelivery">
-        <option value="Sukkur Bazar Delivery">Sukkur Bazar Delivery</option>
-        <option value="Seller Delivery">Seller Delivery</option>
-      </select>
-      <h4>Payment Method</h4>
-      <select id="checkoutPayment">
-        <option value="Cash on Delivery">Cash on Delivery</option>
-        <option value="JazzCash">JazzCash</option>
-        <option value="Easypaisa">Easypaisa</option>
-      </select>
+      <label>Full Name</label><input id="checkoutName" value="${esc(u.name&&u.name!=='Customer'?u.name:'')}" placeholder="Enter your full name" required>
+      <label>Mobile Number</label><input id="checkoutPhone" type="tel" value="${esc(u.phone&&u.phone!=='Gmail account'?u.phone:'')}" placeholder="03xx-xxxxxxx" required>
+      <label>Complete Delivery Address</label><textarea id="checkoutAddressText" placeholder="House / Street / Area, Sukkur" required></textarea>
+      <h4>Delivery Method</h4><select id="checkoutDelivery"><option value="Sukkur Bazar Delivery">Sukkur Bazar Delivery</option><option value="Seller Delivery">Seller Delivery</option></select>
+      <h4>Payment Method</h4><select id="checkoutPayment"><option value="Cash on Delivery">Cash on Delivery</option><option value="JazzCash">JazzCash</option><option value="Easypaisa">Easypaisa</option></select>
       <div style="background:#f6f9f7;border-radius:14px;padding:12px;margin-top:8px"><b>Order Summary</b>${shopSummary}</div>
-      <div class="summary">
-        <div><span>Subtotal</span><b>${money(t.subtotal)}</b></div>
-        <div><span>Delivery</span><b>${money(t.delivery)}</b></div>
-        <div class="total"><span>Total</span><b>${money(t.total)}</b></div>
-      </div>
+      <div class="summary"><div><span>Subtotal</span><b>${money(t.subtotal)}</b></div><div><span>Delivery</span><b>${money(t.delivery)}</b></div><div class="total"><span>Total</span><b>${money(t.total)}</b></div></div>
       <button class="add" type="button" onclick="placeOrder()">Place Order</button>
       <small style="color:var(--muted);text-align:center">One combined bill for the complete cart. Customer payment is collected by Sukkur Bazar.</small>
     </div>`,true);
 }
-
 async function placeOrder(){
   if(!shoppingSession?.user){toast('Please login with Gmail first',true);openAuth();return}
   const name=document.getElementById('checkoutName')?.value.trim(),phone=document.getElementById('checkoutPhone')?.value.trim(),address=document.getElementById('checkoutAddressText')?.value.trim();
@@ -1127,8 +1018,16 @@ async function placeOrder(){
 }
 
 // ============================================================
-//  INIT
+//  MODAL & INIT
 // ============================================================
+function closeModal(){document.getElementById('modalRoot').innerHTML=''}
+function modal(title,body,wide=false){document.getElementById('modalRoot').innerHTML=`<div class="modal-back" onclick="if(event.target===this)closeModal()"><div class="modal ${wide?'wide':''}"><div class="modal-head"><div style="display:flex;align-items:center;gap:8px"><button class="back-btn" style="padding:8px 11px" onclick="closeModal()">← Back</button><h3 style="margin:0">${title}</h3></div><button class="close" onclick="closeModal()">×</button></div><div style="margin-top:16px">${body}</div></div></div>`}
+function openProduct(id){const p=findProduct(id);if(!p){toast('Product not found.',true);return;}const pid=JSON.stringify(String(p.id));const img=productImage(p);modal(p.name,`<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px"><div class="pic" style="height:260px;border-radius:16px;overflow:hidden">${img?`<img src="${esc(img)}" style="width:100%;height:100%;object-fit:cover">`:'📦'}</div><div><div class="shop">${esc(p.shop)}</div><h2 style="margin:7px 0">${esc(p.name)}</h2><div class="stars">★ ${Number(p.rating||4.5).toFixed(1)}</div><div class="price" style="font-size:27px">${money(p.price)} ${Number(p.old||0)>p.price?`<span class="old">${money(p.old)}</span>`:''}</div><p style="color:var(--muted)">${esc(p.description||'Product details provided by the seller.')}</p><p><b>Stock:</b> ${Number(p.stock||0)} available</p><div class="row"><button class="add" onclick="addCart('${esc(p.id)}');closeModal()">Add to Cart</button><button class="gold-btn" onclick="buyNow('${esc(p.id)}')">Buy Now</button></div></div></div>`)}
+function buyNow(id){addCart(id);closeModal();openCart()}
+function resetProducts(){navigate('home')}
+function showAllCategories(){navigate('categories')}
+function renderCats(){renderLiveCategories();}
+
 async function finishSplash(){
   const splash=document.getElementById('splash');
   try{
@@ -1142,35 +1041,13 @@ async function finishSplash(){
   if(!shoppingSession?.user)openAuth();
 }
 
-// ============================================================
-//  MODAL
-// ============================================================
-function closeModal(){document.getElementById('modalRoot').innerHTML=''}
-function modal(title,body,wide=false){document.getElementById('modalRoot').innerHTML=`<div class="modal-back" onclick="if(event.target===this)closeModal()"><div class="modal ${wide?'wide':''}"><div class="modal-head"><div style="display:flex;align-items:center;gap:8px"><button class="back-btn" style="padding:8px 11px" onclick="closeModal()">← Back</button><h3 style="margin:0">${title}</h3></div><button class="close" onclick="closeModal()">×</button></div><div style="margin-top:16px">${body}</div></div></div>`}
-
-function openProduct(id){const p=findProduct(id);if(!p){toast('Product not found.',true);return;}const pid=JSON.stringify(String(p.id));const img=productImage(p);modal(p.name,`<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px"><div class="pic" style="height:260px;border-radius:16px;overflow:hidden">${img?`<img src="${esc(img)}" style="width:100%;height:100%;object-fit:cover">`:'📦'}</div><div><div class="shop">${esc(p.shop)}</div><h2 style="margin:7px 0">${esc(p.name)}</h2><div class="stars">★ ${Number(p.rating||4.5).toFixed(1)}</div><div class="price" style="font-size:27px">${money(p.price)} ${Number(p.old||0)>p.price?`<span class="old">${money(p.old)}</span>`:''}</div><p style="color:var(--muted)">${esc(p.description||'Product details provided by the seller.')}</p><p><b>Stock:</b> ${Number(p.stock||0)} available</p><div class="row"><button class="add" onclick="addCart('${esc(p.id)}');closeModal()">Add to Cart</button><button class="gold-btn" onclick="buyNow('${esc(p.id)}')">Buy Now</button></div></div></div>`)}
-function buyNow(id){addCart(id);closeModal();openCart()}
-
-// ============================================================
-//  RESET / SHOW ALL
-// ============================================================
-function resetProducts(){navigate('home')}
-function showAllCategories(){navigate('categories')}
-
-// ============================================================
-//  STARTUP
-// ============================================================
 renderCats();renderHomeProducts();updateBadges();
 initShoppingSupabase();
 setTimeout(finishSplash,2600);
 
-function renderCats(){renderLiveCategories();}
-
 window.addEventListener('popstate',function(){goBack()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeDrawer();goBack()}});
-
 console.log('🛍️ Sukkur Bazar Shopping App Loaded!');
-console.log('📸 Banner Slider, Drawer, Categories — All Working!');
 </script>
 </body>
 </html>
