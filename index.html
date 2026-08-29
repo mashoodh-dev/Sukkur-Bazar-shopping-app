@@ -34,117 +34,82 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
 .profile-pic img{width:100%;height:100%;object-fit:cover}
 .profile-pic .default-icon{font-size:18px;color:#fff}
 
-/* ===== BANNER SLIDER - FIXED ===== */
+/* ===== BANNER SLIDER - WHITE BG + GOL CORNERS ===== */
 .banner-slider{
   position:relative;
   width:100%;
-  overflow:hidden;
-  background:linear-gradient(135deg,#0e5b3e,#1b7957);
-  margin:0;
+  background:#fff;
+  padding:12px;
   border-radius:0;
-  box-shadow:0 4px 20px rgba(0,0,0,.15);
-  border-bottom:3px solid var(--gold);
+  margin:0;
 }
 .banner-slider .slides{
   display:flex;
   transition:transform 0.6s ease-in-out;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 .banner-slider .slide{
   min-width:100%;
-  height:300px;
+  height:280px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  padding:20px 30px;
-  color:#fff;
+  justify-content:center;
   flex-shrink:0;
-}
-.banner-slider .slide .slide-content{
-  flex:1;
-  min-width:0;
-  padding-right:15px;
-}
-.banner-slider .slide h2{
-  font-size:32px;
-  margin:0 0 6px;
-  font-weight:900;
-  text-shadow:0 2px 10px rgba(0,0,0,.2);
-}
-.banner-slider .slide p{
-  color:#e7f1ec;
-  font-size:15px;
-  margin:0 0 12px;
-  max-width:500px;
-  text-shadow:0 1px 6px rgba(0,0,0,.15);
+  background:#eef6f1;
 }
 .banner-slider .slide .slide-img{
-  font-size:80px;
-  flex-shrink:0;
-  margin-left:15px;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .banner-slider .slide .slide-img img{
-  max-height:200px;
-  max-width:300px;
-  border-radius:16px;
+  width:100%;
+  height:100%;
   object-fit:cover;
-  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.banner-slider .slide .slide-content{
+  display:none;
 }
 .banner-slider .dots{
   position:absolute;
-  bottom:16px;
+  bottom:22px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:12px;
+  gap:10px;
   z-index:5;
+  background:rgba(0,0,0,.3);
+  padding:6px 14px;
+  border-radius:20px;
+  backdrop-filter:blur(4px);
 }
 .banner-slider .dots .dot{
-  width:12px;
-  height:12px;
+  width:10px;
+  height:10px;
   border-radius:50%;
-  background:rgba(255,255,255,.35);
+  background:rgba(255,255,255,.5);
   cursor:pointer;
   transition:.3s;
-  border:2px solid rgba(255,255,255,.15);
+  border:0;
   padding:0;
 }
 .banner-slider .dots .dot.active{
   background:#fff;
   transform:scale(1.25);
-  border-color:var(--gold);
 }
 @media(max-width:700px){
-  .banner-slider .slide{
-    height:220px;
-    padding:16px 18px;
-    flex-wrap:wrap;
-  }
-  .banner-slider .slide h2{
-    font-size:22px;
-  }
-  .banner-slider .slide .slide-img{
-    font-size:50px;
-  }
-  .banner-slider .slide .slide-img img{
-    max-height:100px;
-    max-width:140px;
-  }
+  .banner-slider .slide{height:200px}
+  .banner-slider{padding:8px}
+  .banner-slider .dots{bottom:16px;padding:4px 12px;gap:8px}
+  .banner-slider .dots .dot{width:8px;height:8px}
 }
 @media(max-width:430px){
-  .banner-slider .slide{
-    height:180px;
-    padding:12px 14px;
-  }
-  .banner-slider .slide h2{
-    font-size:18px;
-  }
-  .banner-slider .slide p{
-    font-size:12px;
-  }
-  .banner-slider .slide .slide-img img{
-    max-height:70px;
-    max-width:100px;
-  }
+  .banner-slider .slide{height:150px}
+  .banner-slider{padding:6px}
 }
 
 .gold-btn{background:var(--gold);color:#183526;padding:10px 18px;border-radius:12px;font-weight:800;border:0;cursor:pointer}
@@ -480,16 +445,12 @@ function renderBannerSlider(){
   const dotsContainer=document.getElementById('bannerDots');
   if(!container || !dotsContainer) return;
   
-  const banners = liveBanners.length > 0 ? liveBanners : [{title:'Sukkur Bazar', description:'Har Zaroorat, Ab Aapke Shehar Mein', image_url:'', link_url:''}];
+  const banners = liveBanners.length > 0 ? liveBanners : [{title:'', description:'', image_url:'', link_url:''}];
   
   container.innerHTML = banners.map(b => `
     <div class="slide">
-      <div class="slide-content">
-        <h2>${esc(b.title || 'Sukkur Bazar')}</h2>
-        <p>${esc(b.description || 'Har Zaroorat, Ab Aapke Shehar Mein')}</p>
-        ${b.link_url ? `<button class="gold-btn" onclick="window.location.href='${esc(b.link_url)}'">Shop Now</button>` : ''}
-      </div>
       <div class="slide-img">${b.image_url ? `<img src="${esc(b.image_url)}" alt="Banner">` : '🛍️'}</div>
+      <div class="slide-content"></div>
     </div>
   `).join('');
   
