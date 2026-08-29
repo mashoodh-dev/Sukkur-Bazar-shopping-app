@@ -34,26 +34,118 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
 .profile-pic img{width:100%;height:100%;object-fit:cover}
 .profile-pic .default-icon{font-size:18px;color:#fff}
 
-/* ===== BANNER SLIDER ===== */
-.banner-slider{position:relative;width:100%;overflow:hidden;background:linear-gradient(135deg,#0e5b3e,#1b7957);margin:0;border-radius:0}
-.banner-slider .slides{display:flex;transition:transform 0.5s ease-in-out}
-.banner-slider .slide{min-width:100%;height:260px;display:flex;align-items:center;justify-content:space-between;padding:20px 30px;color:#fff;flex-shrink:0}
-.banner-slider .slide .slide-content{flex:1;min-width:0;padding-right:10px}
-.banner-slider .slide h2{font-size:28px;margin:0 0 6px}
-.banner-slider .slide p{color:#e7f1ec;font-size:14px;margin:0 0 10px;max-width:500px}
-.banner-slider .slide .slide-img{font-size:70px;flex-shrink:0;margin-left:10px}
-.banner-slider .slide .slide-img img{max-height:170px;max-width:250px;border-radius:14px;object-fit:cover}
-.banner-slider .dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:5}
-.banner-slider .dots .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:.3s;border:0;padding:0}
-.banner-slider .dots .dot.active{background:#fff;transform:scale(1.2)}
-@media(max-width:620px){.banner-slider .slide{height:200px;padding:16px 18px;flex-wrap:wrap}
-.banner-slider .slide h2{font-size:20px}
-.banner-slider .slide .slide-img{font-size:40px}
-.banner-slider .slide .slide-img img{max-height:100px;max-width:140px}}
-@media(max-width:430px){.banner-slider .slide{height:170px}
-.banner-slider .slide h2{font-size:17px}
-.banner-slider .slide p{font-size:12px}
-.banner-slider .slide .slide-img img{max-height:70px;max-width:100px}}
+/* ===== BANNER SLIDER - FIXED ===== */
+.banner-slider{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  background:linear-gradient(135deg,#0e5b3e,#1b7957);
+  margin:0;
+  border-radius:0;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+  border-bottom:3px solid var(--gold);
+}
+.banner-slider .slides{
+  display:flex;
+  transition:transform 0.6s ease-in-out;
+}
+.banner-slider .slide{
+  min-width:100%;
+  height:300px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 30px;
+  color:#fff;
+  flex-shrink:0;
+}
+.banner-slider .slide .slide-content{
+  flex:1;
+  min-width:0;
+  padding-right:15px;
+}
+.banner-slider .slide h2{
+  font-size:32px;
+  margin:0 0 6px;
+  font-weight:900;
+  text-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+.banner-slider .slide p{
+  color:#e7f1ec;
+  font-size:15px;
+  margin:0 0 12px;
+  max-width:500px;
+  text-shadow:0 1px 6px rgba(0,0,0,.15);
+}
+.banner-slider .slide .slide-img{
+  font-size:80px;
+  flex-shrink:0;
+  margin-left:15px;
+}
+.banner-slider .slide .slide-img img{
+  max-height:200px;
+  max-width:300px;
+  border-radius:16px;
+  object-fit:cover;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.banner-slider .dots{
+  position:absolute;
+  bottom:16px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:12px;
+  z-index:5;
+}
+.banner-slider .dots .dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:rgba(255,255,255,.35);
+  cursor:pointer;
+  transition:.3s;
+  border:2px solid rgba(255,255,255,.15);
+  padding:0;
+}
+.banner-slider .dots .dot.active{
+  background:#fff;
+  transform:scale(1.25);
+  border-color:var(--gold);
+}
+@media(max-width:700px){
+  .banner-slider .slide{
+    height:220px;
+    padding:16px 18px;
+    flex-wrap:wrap;
+  }
+  .banner-slider .slide h2{
+    font-size:22px;
+  }
+  .banner-slider .slide .slide-img{
+    font-size:50px;
+  }
+  .banner-slider .slide .slide-img img{
+    max-height:100px;
+    max-width:140px;
+  }
+}
+@media(max-width:430px){
+  .banner-slider .slide{
+    height:180px;
+    padding:12px 14px;
+  }
+  .banner-slider .slide h2{
+    font-size:18px;
+  }
+  .banner-slider .slide p{
+    font-size:12px;
+  }
+  .banner-slider .slide .slide-img img{
+    max-height:70px;
+    max-width:100px;
+  }
+}
 
 .gold-btn{background:var(--gold);color:#183526;padding:10px 18px;border-radius:12px;font-weight:800;border:0;cursor:pointer}
 .outline-btn{background:#fff;border:1px solid var(--line);color:var(--green);padding:10px 14px;border-radius:11px;font-weight:700;cursor:pointer}
