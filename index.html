@@ -34,7 +34,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
 .profile-pic img{width:100%;height:100%;object-fit:cover}
 .profile-pic .default-icon{font-size:18px;color:#fff}
 
-/* ===== BANNER SLIDER - WHITE BG + GOL CORNERS ===== */
+/* ===== BANNER SLIDER - FIXED ===== */
 .banner-slider{
   position:relative;
   width:100%;
@@ -58,6 +58,7 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
   justify-content:center;
   flex-shrink:0;
   background:#eef6f1;
+  position:relative;
 }
 .banner-slider .slide .slide-img{
   width:100%;
@@ -65,11 +66,34 @@ button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.hidden
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
 }
 .banner-slider .slide .slide-img img{
   width:100%;
   height:100%;
   object-fit:cover;
+}
+.banner-slider .slide .slide-img .no-image{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100%;
+  width:100%;
+  background:#eef6f1;
+  font-size:48px;
+  color:#bbb;
+}
+.banner-slider .slide .slide-img .fallback-text{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  padding:4px 14px;
+  border-radius:8px;
+  font-size:11px;
+  white-space:nowrap;
 }
 .banner-slider .slide .slide-content{
   display:none;
@@ -439,22 +463,39 @@ function liveProductCard(p){
   </article>`
 }
 
-// ===== BANNER SLIDER =====
+// ===== BANNER SLIDER - FIXED =====
 function renderBannerSlider(){
   const container=document.getElementById('bannerSlides');
   const dotsContainer=document.getElementById('bannerDots');
   if(!container || !dotsContainer) return;
   
-  const banners = liveBanners.length > 0 ? liveBanners : [{title:'', description:'', image_url:'', link_url:''}];
+  // Filter valid banners - only those with image URL
+  const validBanners = liveBanners.filter(b => {
+    return b.image_url && 
+           (b.image_url.startsWith('http') || b.image_url.startsWith('data:image'));
+  });
   
-  container.innerHTML = banners.map(b => `
-    <div class="slide">
-      <div class="slide-img">${b.image_url ? `<img src="${esc(b.image_url)}" alt="Banner">` : '🛍️'}</div>
+  // If no valid banners, show default
+  const displayBanners = validBanners.length > 0 ? validBanners : [{title:'', description:'', image_url:'', link_url:''}];
+  
+  console.log('📸 Displaying banners:', displayBanners.length);
+  
+  container.innerHTML = displayBanners.map((b, index) => `
+    <div class="slide" data-index="${index}">
+      <div class="slide-img">
+        ${b.image_url ? 
+          `<img src="${esc(b.image_url)}" 
+                alt="${esc(b.title || 'Banner')}" 
+                loading="lazy"
+                onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'no-image\\'>🛍️</div><div class=\\'fallback-text\\'>Image not available</div>'">` 
+          : '<div class="no-image">🛍️</div>'
+        }
+      </div>
       <div class="slide-content"></div>
     </div>
   `).join('');
   
-  dotsContainer.innerHTML = banners.map((_, i) => `
+  dotsContainer.innerHTML = displayBanners.map((_, i) => `
     <button class="dot ${i === 0 ? 'active' : ''}" onclick="goToBanner(${i})"></button>
   `).join('');
   
@@ -476,6 +517,7 @@ function goToBanner(index){
   const container=document.getElementById('bannerSlides');
   if(!container) return;
   const totalSlides = container.children.length;
+  if(totalSlides === 0) return;
   if(index < 0) index = totalSlides - 1;
   if(index >= totalSlides) index = 0;
   bannerIndex = index;
@@ -597,7 +639,18 @@ async function loadLiveCatalog(){
     if(profErr) console.warn('Profile:',profErr.message);
     
     liveCategories=(cats||[]).map(c=>({id:c.id,name:c.name,icon:c.icon||c.emoji||'📦',image_url:c.image_url||'',is_active:c.is_active}));
-    liveBanners=bs||[];
+    
+    // FIX: Filter valid banners only
+    liveBanners=(bs||[]).filter(b => {
+      const hasValidImage = b.image_url && 
+                            (b.image_url.startsWith('http') || b.image_url.startsWith('data:image'));
+      if (!hasValidImage) {
+        console.warn('⚠️ Invalid banner image URL:', b.id, b.title);
+      }
+      return hasValidImage;
+    });
+    console.log('📸 Valid banners loaded:', liveBanners.length);
+    
     liveDeals=deals||[];
     liveSupport=support||{};
     userProfilePic=profile?.avatar_url||'';
